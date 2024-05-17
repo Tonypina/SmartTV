@@ -1,0 +1,157 @@
+import tkinter as tk
+from tkinter import ttk
+from PIL import Image, ImageTk
+import time
+
+class SmartTVApp:
+    def __init__(self, root, smart_tv):
+        self.root = root
+        self.smart_tv = smart_tv
+        self.root.title("Smart TV Interface")
+        self.root.attributes('-fullscreen', True)
+        self.root.bind('<Escape>', self.exit_app)
+        self.root.bind('<Control-q>', self.exit_app)
+
+        # Obtener la resolución del monitor
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+
+        # Inicializar variables para el fondo
+        self.bg_paths = ["background1.jpg", "background2.jpg", "background3.jpg"]
+        self.bg_images = [self.load_image(path, screen_width, screen_height) for path in self.bg_paths]
+        self.current_bg_index = 0
+        self.bg_label = tk.Label(root)
+        self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+        self.root.bind("<Configure>", self.resize_background)
+        self.update_background()
+
+        # Crear botones de acceso
+        buttons_info = [
+            {"name": "Netflix", "icon": "netflix.png", "command": self.smart_tv.open_netflix_kiosk},
+            {"name": "YouTube", "icon": "youtube.png", "command": self.smart_tv.open_youtube_kiosk},
+            {"name": "Google", "icon": "google.png", "command": self.smart_tv.open_google_kiosk},
+            {"name": "Reproducir", "icon": "usb.png", "command": lambda: self.smart_tv.play_usb_content(self.root)},
+            {"name": "Reproducir con VLC", "icon": "vlc.png", "command": lambda: self.smart_tv.play_vlc_content(self.root)}
+        ]
+
+        self.buttons = []
+        for i, button_info in enumerate(buttons_info):
+            button = ttk.Button(root, text=button_info["name"], compound=tk.TOP, style="WhiteButton.TButton",
+                                command=button_info["command"])
+            button.image = self.load_image(button_info["icon"], 100, 100)
+            button.config(image=button.image)
+            button.grid(row=2, column=i, padx=10, pady=10)
+            self.buttons.append(button)
+
+        # Configurar la geometría de la ventana
+        root.grid_rowconfigure(0, weight=1)
+        root.grid_rowconfigure(4, weight=1)
+        root.grid_columnconfigure(list(range(len(self.buttons))), weight=1)
+
+        # Establecer estilos para los botones
+        style = ttk.Style()
+        style.configure("WhiteButton.TButton", background="white", foreground="black", bordercolor="white")
+
+        # Añadir título en la parte superior izquierda
+        title_label = tk.Label(root, text="Smart TV", font=("Helvetica", 30), fg="black", bg=root.cget("bg"))
+        title_label.grid(row=0, column=0, padx=10, pady=10, sticky="w")
+
+                # Añadir la hora en la parte superior derecha
+        self.time_label = tk.Label(root, text="", font=("Helvetica", 24), fg="black", bg=root.cget("bg"))
+        self.time_label.grid(row=0, column=len(self.buttons)-1, padx=10, pady=10, sticky="e")
+        self.update_time()
+
+        # Estado para rastrear la posición actual del cursor
+        self.current_button_index = 0
+
+        # Inicializar la entrada del teclado universal
+        self.keyboard = None  # inputs no se está utilizando actualmente
+
+        # Lógica para manejar la entrada del teclado universal
+        self.root.bind('<KeyPress>', self.handle_keypress)
+
+        # Configurar estilos para los botones seleccionados
+        style.configure("SelectedButton.TButton", background="yellow", foreground="black", bordercolor="white")
+
+    def resize_background(self, event):
+        img = self.bg_images[self.current_bg_index]
+        img = img.resize((self.root.winfo_width(), self.root.winfo_height()), Image.ANTIALIAS if hasattr(Image, 'ANTIALIAS') else None)
+        self.bg_images[self.current_bg_index] = ImageTk.PhotoImage(img)
+        self.bg_label.configure(image=self.bg_images[self.current_bg_index])
+
+    def update_background(self):
+        self.current_bg_index = (self.current_bg_index + 1) % len(self.bg_images)
+        self.bg_label.configure(image=self.bg_images[self.current_bg_index])
+        self.root.after(5000, self.update_background)
+
+    def update_time(self):
+        current_time = time.strftime("%H:%M:%S")
+        self.time_label.config(text=current_time)
+        self.root.after(1000, self.update_time)
+
+    def exit_app(self, event=None):
+        self.smart_tv.stop_media_player()  # Detener la reproducción antes de salir
+        self.root.destroy()
+
+    def load_image(self, path, width, height):
+        img = Image.open(path)
+        img = img.resize((width, height), Image.ANTIALIAS if hasattr(Image, 'ANTIALIAS') else None)
+        return ImageTk.PhotoImage(img)
+
+    def handle_keypress(self, event):
+        key = event.keysym.lower()
+
+        if key == 'a':
+            self.move_left()
+        elif key == 'd':
+            self.move_right()
+        elif key == 'w':
+            self.move_up()
+        elif key == 's':
+            self.move_down()
+        elif key == 'return':
+            self.select_application()
+        elif key == 'm':
+            self.show_media_player_interface()
+        elif key == 'q':
+            if self.smart_tv.media_player:
+                self.smart_tv.stop_media_player()
+                self.root.deiconify()  # Mostrar la ventana principal después de salir del reproductor multimedia
+
+    def move_left(self):
+        self.current_button_index = (self.current_button_index - 1) % len(self.buttons)
+        self.highlight_current_button()
+
+    def move_right(self):
+        self.current_button_index = (self.current_button_index + 1) % len(self.buttons)
+        self.highlight_current_button()
+
+    def move_up(self):
+        self.current_button_index = (self.current_button_index - len(self.buttons)) % len(self.buttons)
+        self.highlight_current_button()
+
+    def move_down(self):
+        self.current_button_index = (self.current_button_index + len(self.buttons)) % len(self.buttons)
+        self.highlight_current_button()
+
+    def select_application(self):
+        selected_button = self.buttons[self.current_button_index]
+        selected_button.invoke()
+
+    def highlight_current_button(self):
+        for i, button in enumerate(self.buttons):
+            if i == self.current_button_index:
+                button.configure(style="SelectedButton.TButton")
+            else:
+                button.configure(style="WhiteButton.TButton")
+
+    def show_media_player_interface(self):
+        # Implementar lógica para mostrar la interfaz del reproductor multimedia
+        pass
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    smart_tv = SmartTV()
+    app = SmartTVApp(root, smart_tv)
+    root.mainloop()
+
