@@ -12,15 +12,6 @@ class IRReceiver:
         self.in_code = False
         self.last_tick = 0
 
-        # Mapeo de códigos IR a comandos
-        self.command_map = {
-            '10000000100001010001001011101100': 'up',
-            '10000000100001010001001011101000': 'down',
-            '10000000100001010001001011100100': 'left',
-            '10000000100001010001001011100010': 'right',
-            '10000000100001010001001011011100': 'select'
-        }
-
     def callback(self, gpio, level, tick):
         if level == pigpio.FALLING_EDGE:
             if not self.in_code:
@@ -31,32 +22,12 @@ class IRReceiver:
             if self.in_code:
                 self.data.append(pigpio.tickDiff(self.last_tick, tick))
                 self.in_code = False
-                self.decode_data()
+                self.print_data()
         self.last_tick = tick
 
-    def decode_data(self):
-        if len(self.data) < 32:  # La mayoría de los códigos IR tienen 32 bits
-            return
-        
-        binary_string = ''.join(['1' if t > 1000 else '0' for t in self.data])
-        command = self.command_map.get(binary_string)
-        
-        if command:
-            self.execute_command(command)
-
-    def execute_command(self, command):
-        print(f"Command received: {command}")
-        # Aquí puedes añadir la lógica para controlar tu interfaz
-        if command == 'up':
-            print("Move up")
-        elif command == 'down':
-            print("Move down")
-        elif command == 'left':
-            print("Move left")
-        elif command == 'right':
-            print("Move right")
-        elif command == 'select':
-            print("Select option")
+    def print_data(self):
+        if len(self.data) > 0:
+            print("Raw data:", self.data)
 
     def stop(self):
         self.pi.stop()
