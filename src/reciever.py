@@ -21,5 +21,10 @@ def ProcessIRRemote():
         print(command)        
             
 #define Global
-conn = RawConnection()
-print("Starting Up...")
+
+if __name__ == "__main__":
+    conn = RawConnection()
+    print("Starting Up...")
+
+    while True:
+        ProcessIRRemote()
