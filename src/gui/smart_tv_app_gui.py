@@ -76,8 +76,8 @@ class SmartTVAppGUI(tk.Tk):
 
         # Botones del menú lateral
         self.buttonHome = tk.Button(self.menu_lateral)        
-        self.buttonNetwork = tk.Button(self.menu_lateral)
         self.buttonUSB = tk.Button(self.menu_lateral)
+        self.buttonNetwork = tk.Button(self.menu_lateral)
 
         buttons_info = [
             ("Home", "\uf109", self.buttonHome, self.abrir_home_screen ),
@@ -123,12 +123,12 @@ class SmartTVAppGUI(tk.Tk):
         HomeScreen(self.cuerpo_principal, self.app_logic)   
         
     def abrir_network_screen(self):   
-        self.limpiar_panel(self.cuerpo_principal, self.app_logic)     
-        NetworkScreen(self.cuerpo_principal) 
+        self.limpiar_panel(self.cuerpo_principal)     
+        NetworkScreen(self.cuerpo_principal, self.app_logic) 
         
     def abrir_usb_screen(self):   
-        self.limpiar_panel(self.cuerpo_principal, self.app_logic)     
-        USBScreen(self.cuerpo_principal) 
+        self.limpiar_panel(self.cuerpo_principal)     
+        USBScreen(self.cuerpo_principal, self.app_logic) 
 
     def limpiar_panel(self,panel):
     # Función para limpiar el contenido del panel
