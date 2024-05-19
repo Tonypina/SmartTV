@@ -29,15 +29,15 @@ class NetworkScreen():
         self.labelTitulo.pack(side=tk.TOP, fill='both', expand=True)
 
         self.selectedSSIDLabel = tk.Label(self.barra_der, text="")
-        self.selectedSSIDLabel.config(fg="#fff", font=(
-            "Roboto", 10), padx=10, width=20)
+        self.selectedSSIDLabel.config(fg="#222d33", font=(
+            "Roboto", 10), padx=10, width=20, bg=COLOR_CUERPO_PRINCIPAL)
         self.selectedSSIDLabel.pack(side=tk.TOP, expand=True)
 
         for network in self.wifi_ssids:
             self.ssids_config(network)
 
     def ssids_config(self, ssid):
-        ssidLabel = tk.Button(self.barra_izq, text=ssid, anchor="w", bd=0, fg="white", command=self.select_ssid(ssid))
+        ssidLabel = tk.Button(self.barra_izq, text=ssid, anchor="w", bd=0, fg="#222d33", command=self.select_ssid(ssid), bg=COLOR_CUERPO_PRINCIPAL)
         ssidLabel.pack()
 
     def select_ssid(self, ssid):
