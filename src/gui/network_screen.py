@@ -10,15 +10,17 @@ class NetworkScreen():
 
         # Crear paneles: barra sup
         self.barra_sup = tk.Frame(panel_principal)
-        self.barra_sup.pack(side=tk.TOP, fill=tk.X, expand=False, bg=COLOR_CUERPO_PRINCIPAL) 
+        self.barra_sup.pack(side=tk.TOP, fill=tk.X, expand=False) 
         
         # Crear paneles: barra izquierda
         self.barra_izq = tk.Frame(panel_principal)
-        self.barra_izq.pack(side=tk.LEFT, fill="both", expand=True, bg=COLOR_CUERPO_PRINCIPAL) 
+        self.barra_izq.config(bg=COLOR_CUERPO_PRINCIPAL)
+        self.barra_izq.pack(side=tk.LEFT, fill="both", expand=True) 
 
         # Crear paneles: barra der
         self.barra_der = tk.Frame(panel_principal)
-        self.barra_der.pack(side=tk.RIGHT, fill="both", expand=True, bg=COLOR_CUERPO_PRINCIPAL)  
+        self.barra_der.config(bg=COLOR_CUERPO_PRINCIPAL)
+        self.barra_der.pack(side=tk.RIGHT, fill="both", expand=True)  
 
         # Primer Label con texto
         self.labelTitulo = tk.Label(
