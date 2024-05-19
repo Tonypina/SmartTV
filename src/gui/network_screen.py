@@ -18,7 +18,7 @@ class NetworkScreen():
 
         # Crear paneles: barra der
         self.barra_der = tk.Frame(panel_principal)
-        self.barra_der.pack(side=tk.RIGHT, fill=tk.Y, expand=False)  
+        self.barra_der.pack(side=tk.RIGHT, fill="both", expand=True)  
 
         # Primer Label con texto
         self.labelTitulo = tk.Label(
@@ -29,9 +29,13 @@ class NetworkScreen():
         for network in self.wifi_ssids:
             self.ssids_config(network)
     
+        self.selectedSSIDLabel = tk.Label(self.barra_der)
+        self.selectedSSIDLabel.pack()
+
     def ssids_config(self, ssid):
-        ssidLabel = tk.Button(self.barra_izq, text=ssid, anchor="w", bd=0, fg="white", command=self.select_ssid)
+        ssidLabel = tk.Button(self.barra_izq, text=ssid, anchor="w", bd=0, fg="white", command=self.select_ssid(ssid))
         ssidLabel.pack()
 
-    def select_ssid(self):
+    def select_ssid(self, ssid):
+        self.selectedSSIDLabel.config(text=ssid)
         pass
