@@ -47,7 +47,7 @@ class NetworkScreen():
         ssidLabel.bind("<FocusOut>", lambda event: self.on_leave(event, ssidLabel))
 
     def select_ssid(self, ssid):
-        self.selectedSSIDLabel.config(text="SSID: {ssid}")
+        self.selectedSSIDLabel.config(text="SSID: "+ssid)
         # self.selectedSSIDLabel.pack(side=tk.TOP, expand=True)
         pass
 
