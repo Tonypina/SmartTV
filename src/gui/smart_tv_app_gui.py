@@ -27,9 +27,6 @@ class SmartTVAppGUI(tk.Tk):
     
     def config_window(self):
         # Configuración inicial de la ventana
-        # self.title('Python GUI')
-        # self.iconbitmap("./img/logo.ico")
-
         pantall_ancho = self.winfo_screenwidth()
         pantall_largo = self.winfo_screenheight()
         self.geometry(f"{pantall_ancho}x{pantall_largo}")
@@ -89,8 +86,7 @@ class SmartTVAppGUI(tk.Tk):
             self.configurar_boton_menu(button, text, icon, font_awesome, ancho_menu, alto_menu,comando)                    
     
     def controles_cuerpo(self):
-        # HomeScreen(self.cuerpo_principal)   
-        pass     
+        HomeScreen(self.cuerpo_principal)
   
     def configurar_boton_menu(self, button, text, icon, font_awesome, ancho_menu, alto_menu, comando):
         button.config(text=f"  {icon}    {text}", anchor="w", font=font_awesome,
