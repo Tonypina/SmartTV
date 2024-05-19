@@ -83,7 +83,7 @@ class SmartTVAppGUI:
                                 command=button_info["command"])
             button.image = self.load_image(button_info["icon"], 100, 100)
             button.config(image=button.image)
-            button.grid(row=2, column=i, padx=10, pady=10)
+            button.grid(row=2, column=i+1, padx=10, pady=10)
             self.buttons.append(button)
 
     def show_home(self):
