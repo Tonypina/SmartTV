@@ -21,21 +21,28 @@ class HomeScreen():
         self.barra_inferior.config(bg=COLOR_CUERPO_PRINCIPAL)
         self.barra_inferior.pack(side=tk.BOTTOM, fill='both', expand=True)  
 
+        self.superior_row = tk.Frame( self.barra_inferior )
+        self.superior_row.config(bg=COLOR_CUERPO_PRINCIPAL)
+        self.superior_row.pack(side=tk.TOP, fill='both', expand=True)  
+        self.inferior_row = tk.Frame( self.barra_inferior )
+        self.inferior_row.config(bg=COLOR_CUERPO_PRINCIPAL)
+        self.inferior_row.pack(side=tk.BOTTOM, fill='both', expand=True)  
+
         # Primer Label con texto
         self.labelTitulo = tk.Label(
             self.barra_superior, text="MaFE TV")
         self.labelTitulo.config(fg="#222d33", font=("Roboto", 30), bg=COLOR_CUERPO_PRINCIPAL, pady=50)
         self.labelTitulo.pack(side=tk.TOP, fill='both', expand=True)
 
-        self.buttonNetflix = tk.Button( self.barra_inferior )
+        self.buttonNetflix = tk.Button( self.superior_row )
         self.nextflixImg = util_img.leer_imagen("./../src/img/Netflix.png", (self.button_width, self.button_height))
-        self.buttonGoogle = tk.Button( self.barra_inferior )
+        self.buttonGoogle = tk.Button( self.superior_row )
         self.googleImg = util_img.leer_imagen("./../src/img/Google.png", (self.button_width, self.button_height))
-        self.buttonYoutube = tk.Button( self.barra_inferior )
+        self.buttonYoutube = tk.Button( self.superior_row )
         self.youtubeImg = util_img.leer_imagen("./../src/img/Youtube.png", (self.button_width, self.button_height))
-        self.buttonSpotify = tk.Button( self.barra_inferior )
+        self.buttonSpotify = tk.Button( self.inferior_row )
         self.spotifyImg = util_img.leer_imagen("./../src/img/Spotify.png", (self.button_width, self.button_height))
-        self.buttonHBO = tk.Button( self.barra_inferior )
+        self.buttonHBO = tk.Button( self.inferior_row )
         self.HBOImg = util_img.leer_imagen("./../src/img/HBO.png", (self.button_width, self.button_height))
 
         buttons_info = [
