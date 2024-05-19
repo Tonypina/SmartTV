@@ -6,19 +6,19 @@ from tkinter import filedialog
 from PIL import Image, ImageTk
 
 class SmartTVAppLogic:
-    def __init__(self, screen_width, screen_height):
+    def __init__(self):
         self.media_player = None
         self.media_thread = None
 
-    def open_netflix_kiosk(self):
+    def open_netflix_kiosk(self, screen_width, screen_height):
         url_servicios_video = "https://www.netflix.com"
         os.system(f"chromium-browser --no-sandbox --start-fullscreen --window-size={screen_width},{screen_height} --kiosk {url_servicios_video}")
 
-    def open_youtube_kiosk(self):
+    def open_youtube_kiosk(self, screen_width, screen_height):
         url_servicios_video = "https://www.youtube.com"
         os.system(f"chromium-browser --no-sandbox --start-fullscreen --window-size={screen_width},{screen_height} --kiosk {url_servicios_video}")
 
-    def open_google_kiosk(self):
+    def open_google_kiosk(self, screen_width, screen_height):
         url_servicios_video = "https://www.google.com"
         os.system(f"chromium-browser --no-sandbox --start-fullscreen --window-size={screen_width},{screen_height} --kiosk {url_servicios_video}")
 

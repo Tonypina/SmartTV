@@ -29,9 +29,9 @@ class SmartTVAppGUI:
 
         # Crear botones de acceso
         buttons_info = [
-            {"name": "Netflix", "icon": "netflix.png", "command": self.app_logic.open_netflix_kiosk},
-            {"name": "YouTube", "icon": "youtube.png", "command": self.app_logic.open_youtube_kiosk},
-            {"name": "Google", "icon": "google.png", "command": self.app_logic.open_google_kiosk},
+            {"name": "Netflix", "icon": "netflix.png", "command": self.app_logic.open_netflix_kiosk(screen_width, screen_height)},
+            {"name": "YouTube", "icon": "youtube.png", "command": self.app_logic.open_youtube_kiosk(screen_width, screen_height)},
+            {"name": "Google", "icon": "google.png", "command": self.app_logic.open_google_kiosk(screen_width, screen_height)},
             {"name": "Reproducir", "icon": "usb.png", "command": self.app_logic.play_usb_content},
             {"name": "Reproducir con VLC", "icon": "vlc.png", "command": self.app_logic.play_vlc_content}
         ]
