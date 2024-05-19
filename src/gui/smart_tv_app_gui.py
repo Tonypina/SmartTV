@@ -10,10 +10,10 @@ from gui.network_screen import NetworkScreen
 class SmartTVAppGUI(tk.Tk):
 
     def __init__(self):
-        super().__init__()
-        self.logo = util_img.leer_imagen("./src/img/logo.png", (560, 136))
-        self.perfil = util_img.leer_imagen("./src/img/Perfil.png", (100, 100))
-        self.img_sitio_construccion = util_img.leer_imagen("./src/img/sitio_construccion.png", (200, 200))
+        # super().__init__()
+        # self.logo = util_img.leer_imagen("./src/img/logo.png", (560, 136))
+        # self.perfil = util_img.leer_imagen("./src/img/Perfil.png", (100, 100))
+        # self.img_sitio_construccion = util_img.leer_imagen("./src/img/sitio_construccion.png", (200, 200))
         self.config_window()
         self.paneles()
         self.controles_barra_superior()        
@@ -23,7 +23,7 @@ class SmartTVAppGUI(tk.Tk):
     def config_window(self):
         # Configuración inicial de la ventana
         self.title('Python GUI')
-        self.iconbitmap("./img/logo.ico")
+        # self.iconbitmap("./img/logo.ico")
 
         pantall_ancho = self.winfo_screenwidth()
         pantall_largo = self.winfo_screenheight()
