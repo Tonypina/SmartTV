@@ -86,41 +86,6 @@ class SmartTVAppGUI:
             button.grid(row=2, column=i, padx=10, pady=10)
             self.buttons.append(button)
 
-    def show_home(self):
-        # Limpiar el área de contenido
-        for widget in self.root.winfo_children():
-            widget.destroy()
-
-        # Crear el sidebar y los botones de acceso para la página de inicio (Home)
-        self.create_home_buttons()
-
-        # Configurar la geometría de la ventana
-        self.root.grid_rowconfigure(0, weight=1)
-        self.root.grid_rowconfigure(4, weight=1)
-        self.root.grid_columnconfigure(list(range(len(self.buttons))), weight=1)
-
-        # Establecer estilos para los botones
-        style = ttk.Style()
-        style.configure("WhiteButton.TButton", background="white", foreground="black", bordercolor="white")
-
-        # Añadir título en la parte superior izquierda
-        title_label = tk.Label(self.root, text="Smart TV", font=("Helvetica", 30), fg="black", bg=self.root.cget("bg"))
-        title_label.grid(row=0, column=0, padx=10, pady=10, sticky="w")
-
-        # Añadir la hora en la parte superior derecha
-        self.time_label = tk.Label(self.root, text="", font=("Helvetica", 24), fg="black", bg=self.root.cget("bg"))
-        self.time_label.grid(row=0, column=len(self.buttons)-1, padx=10, pady=10, sticky="e")
-        self.update_time()
-
-        # Estado para rastrear la posición actual del cursor
-        self.current_button_index = 0
-
-        # Lógica para manejar la entrada del teclado universal
-        self.root.bind('<KeyPress>', self.handle_keypress)
-
-        # Configurar estilos para los botones seleccionados
-        style.configure("SelectedButton.TButton", background="yellow", foreground="black", bordercolor="white")
-
     def create_home_buttons(self):
         # Crear botones de acceso (Home)
         buttons_info = [
