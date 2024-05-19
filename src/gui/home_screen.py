@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import font
 from config import COLOR_BARRA_SUPERIOR, COLOR_MENU_LATERAL, COLOR_CUERPO_PRINCIPAL, COLOR_MENU_CURSOR_ENCIMA
 from util.smart_tv_app_logic import SmartTVAppLogic
+import util.util_imagenes as util_img
 
 class HomeScreen():
 
@@ -10,15 +11,15 @@ class HomeScreen():
         button_width = 20
         button_height = 2
         button_font = font.Font(family='FontAwesome', size=15)
-        
+
         self.buttonNetflix = tk.Button( panel_principal )
 
         buttons_info = [
-            ("Netflix", self.buttonNetflix, app_logic.open_netflix_kiosk)
+            ("Netflix", util_img.leer_imagen("./src/Netflix.png", (100, 100)), self.buttonNetflix, app_logic.open_netflix_kiosk)
         ]
 
-        for text, button, command in buttons_info:
-            self.buttons_config(text, button, button_font, button_width, button_height, command)
+        for text, img, button, command in buttons_info:
+            self.buttons_config(text, img, button, button_font, button_width, button_height, command)
 
         # Crear paneles: barra superior
         # self.barra_superior = tk.Frame( panel_principal)
@@ -39,8 +40,8 @@ class HomeScreen():
         # self.label_imagen.place(x=0, y=0, relwidth=1, relheight=1)
         # self.label_imagen.config(fg="#fff", font=("Roboto", 10), bg=COLOR_CUERPO_PRINCIPAL)
 
-    def buttons_config(self, text, button, button_font, button_width, button_height, command):
-        button.config(text=f"{text}", anchor="center", font=button_font,
+    def buttons_config(self, text, img, button, button_font, button_width, button_height, command):
+        button.config(text=f"{text}", image=img, anchor="center", font=button_font,
                       bd=0, bg=COLOR_MENU_LATERAL, fg="white", width=button_width, height=button_height,
                       command = command)
         button.pack(side=tk.LEFT, expand=True)
