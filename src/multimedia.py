@@ -81,7 +81,7 @@ class SmartTVApp:
 
     def resize_background(self, event):
         img = self.bg_images[self.current_bg_index]
-        img = img.resize((self.root.winfo_width(), self.root.winfo_height()), Image.ANTIALIAS if hasattr(Image, 'ANTIALIAS') else None)
+        img = img.resize((event.width, event.height), Image.ANTIALIAS)
         self.bg_images[self.current_bg_index] = ImageTk.PhotoImage(img)
         self.bg_label.configure(image=self.bg_images[self.current_bg_index])
 
@@ -126,7 +126,7 @@ class SmartTVApp:
 
     def load_image(self, path, width, height):
         img = Image.open(path)
-        img = img.resize((width, height), Image.ANTIALIAS if hasattr(Image, 'ANTIALIAS') else None)
+        img = img.resize((width, height), Image.ANTIALIAS)
         return ImageTk.PhotoImage(img)
 
     def handle_keypress(self, event):
@@ -231,6 +231,7 @@ class SmartTVApp:
         self.stop_media_player()  # Detener la reproducción actual si la hay
 
         if media_type == "image":
+            image_files = [f for f in os.listdir(usb_path) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
             self.play_slideshow(usb_path, image_files)
         elif media_type == "audio":
             self.play_audio(media_path)
@@ -280,5 +281,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = SmartTVApp(root)
     root.mainloop()
-
-
