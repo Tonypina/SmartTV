@@ -17,6 +17,7 @@ class SmartTVApp:
         # Obtener la resolución del monitor
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
+        self.root.geometry("%d%d" % (self.screen_width, self.screen_height))
 
         # Inicializar variables para el fondo
         self.bg_paths = ["background1.jpg", "background2.jpg", "background3.jpg"]
@@ -49,6 +50,7 @@ class SmartTVApp:
         root.grid_rowconfigure(0, weight=1)
         root.grid_rowconfigure(4, weight=1)
         root.grid_columnconfigure(list(range(len(self.buttons))), weight=1)
+
 
         # Establecer estilos para los botones
         style = ttk.Style()
