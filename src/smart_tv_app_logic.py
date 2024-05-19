@@ -12,7 +12,7 @@ class SmartTVAppLogic:
         self.screen_width = screen_width
         self.screen_height = screen_height
 
-    def open_netflix_kiosk(self):
+    def open_netflix_kiosk(self): 
         url_servicios_video = "https://www.netflix.com"
         os.system(f"chromium-browser --start-fullscreen --enable-chrome-browser-cloud-management --window-size={self.screen_width},{self.screen_height} --window-position=0,0 --app={url_servicios_video}")
 
