@@ -18,8 +18,8 @@ class HomeScreen():
         self.googleImg = util_img.leer_imagen("./../src/img/Google.png", (200, 200))
 
         buttons_info = [
-            ("Netflix", self.nextflixImg, self.buttonNetflix, app_logic.open_netflix_kiosk)
-            ("Google", self.googleImg, self.buttonGoogle, app_logic.open_google_kiosk)
+            ("Netflix", self.nextflixImg, self.buttonNetflix, app_logic.open_netflix_kiosk),
+            ("Google", self.googleImg, self.buttonGoogle, app_logic.open_google_kiosk),
         ]
 
         for text, img, button, command in buttons_info:
