@@ -18,7 +18,8 @@ class HomeScreen():
 
         # Crear paneles: barra inferior
         self.barra_inferior = tk.Frame( panel_principal)
-        self.barra_inferior.pack(side=tk.BOTTOM, fill='both', expand=True, bg=COLOR_CUERPO_PRINCIPAL)  
+        self.barra_inferior.config(bg=COLOR_CUERPO_PRINCIPAL)
+        self.barra_inferior.pack(side=tk.BOTTOM, fill='both', expand=True)  
 
         # Primer Label con texto
         self.labelTitulo = tk.Label(
