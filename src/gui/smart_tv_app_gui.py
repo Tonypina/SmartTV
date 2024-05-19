@@ -69,7 +69,7 @@ class SmartTVAppGUI(tk.Tk):
     
     def controles_menu_lateral(self):
         # Configuración del menú lateral
-        ancho_menu = 20
+        ancho_menu = 100
         alto_menu = 2
         font_awesome = font.Font(family='FontAwesome', size=15)
 
