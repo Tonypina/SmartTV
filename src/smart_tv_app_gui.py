@@ -32,7 +32,15 @@ class SmartTVAppGUI:
         self.buttons = []
         # self.create_home_buttons()
 
-        self.show_network()
+        # Crear el sidebar
+        self.sidebar = ttk.Frame(self.root, width=200, relief="raised", padding=(10, 10))
+        self.sidebar.grid(row=0, column=0, sticky="nsew")
+
+        # Crear los botones del sidebar
+        self.home_button = ttk.Button(self.sidebar, text="Home", command=self.show_home)
+        self.home_button.grid(row=0, column=0, sticky="ew", pady=5)
+        self.network_button = ttk.Button(self.sidebar, text="Red", command=self.show_network)
+        self.network_button.grid(row=1, column=0, sticky="ew", pady=5)
 
         # Configurar la geometría de la ventana
         root.grid_rowconfigure(0, weight=1)
@@ -83,16 +91,6 @@ class SmartTVAppGUI:
         # Limpiar el área de contenido
         for widget in self.root.winfo_children():
             widget.destroy()
-            
-        # Crear el sidebar
-        self.sidebar = ttk.Frame(self.root, width=200, relief="raised", padding=(10, 10))
-        self.sidebar.grid(row=0, column=0, sticky="nsew")
-
-        # Crear los botones del sidebar
-        self.home_button = ttk.Button(self.sidebar, text="Home", command=self.show_home)
-        self.home_button.grid(row=0, column=0, sticky="ew", pady=5)
-        self.network_button = ttk.Button(self.sidebar, text="Red", command=self.show_network)
-        self.network_button.grid(row=1, column=0, sticky="ew", pady=5)
 
         # Mostrar los botones de acceso para la página de inicio (Home)
         self.create_home_buttons()
@@ -126,17 +124,6 @@ class SmartTVAppGUI:
         # Limpiar el área de contenido
         for widget in self.root.winfo_children():
             widget.destroy()
-
-        # Crear el sidebar
-        self.sidebar = ttk.Frame(self.root, width=200, relief="raised", padding=(10, 10))
-        self.sidebar.grid(row=0, column=0, sticky="nsew")
-
-        # Crear los botones del sidebar
-        self.home_button = ttk.Button(self.sidebar, text="Home", command=self.show_home)
-        self.home_button.grid(row=0, column=0, sticky="ew", pady=5)
-        self.network_button = ttk.Button(self.sidebar, text="Red", command=self.show_network)
-        self.network_button.grid(row=1, column=0, sticky="ew", pady=5)
-
 
         # Mostrar la lista de redes disponibles
         self.app_logic.display_available_networks()
