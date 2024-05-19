@@ -30,17 +30,19 @@ class NetworkScreen():
 
         self.selectedSSIDLabel = tk.Label(self.barra_der, text="")
         self.selectedSSIDLabel.config(fg="#222d33", font=(
-            "Roboto", 10), padx=10, width=20, bg=COLOR_CUERPO_PRINCIPAL)
+            "Roboto", 20), padx=10, width=20, bg=COLOR_CUERPO_PRINCIPAL)
         self.selectedSSIDLabel.pack(side=tk.TOP, expand=True)
 
         for network in self.wifi_ssids:
             self.ssids_config(network)
 
     def ssids_config(self, ssid):
-        ssidLabel = tk.Button(self.barra_izq, text=ssid, anchor="w", bd=0, fg="#222d33", command=self.select_ssid(ssid), bg=COLOR_CUERPO_PRINCIPAL, pady=10)
+        ssidLabel = tk.Button(self.barra_izq, font=(
+            "Roboto", 20), text=ssid, anchor="w", bd=0, fg="#222d33", command=self.select_ssid(ssid), 
+            highlightthickness = 0, bg=COLOR_CUERPO_PRINCIPAL, pady=10, expand=True, )
         ssidLabel.pack()
 
     def select_ssid(self, ssid):
         self.selectedSSIDLabel.config(text=ssid)
-        self.selectedSSIDLabel.pack(side=tk.TOP, expand=True)
+        # self.selectedSSIDLabel.pack(side=tk.TOP, expand=True)
         pass
