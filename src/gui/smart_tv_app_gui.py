@@ -47,7 +47,7 @@ class SmartTVAppGUI(tk.Tk):
         font_awesome = font.Font(family='FontAwesome', size=12)
 
         # Etiqueta de título
-        self.labelTitulo = tk.Label(self.barra_superior, text="Autodidacta")
+        self.labelTitulo = tk.Label(self.barra_superior, text="MaFE TV")
         self.labelTitulo.config(fg="#fff", font=(
             "Roboto", 15), bg=COLOR_BARRA_SUPERIOR, pady=10, width=16)
         self.labelTitulo.pack(side=tk.LEFT)
@@ -59,7 +59,7 @@ class SmartTVAppGUI(tk.Tk):
 
         # Etiqueta de informacion
         self.labelTitulo = tk.Label(
-            self.barra_superior, text="servicio@autodidacta.mx")
+            self.barra_superior, text="Piña San Miguel Colón")
         self.labelTitulo.config(fg="#fff", font=(
             "Roboto", 10), bg=COLOR_BARRA_SUPERIOR, padx=10, width=20)
         self.labelTitulo.pack(side=tk.RIGHT)
@@ -69,11 +69,6 @@ class SmartTVAppGUI(tk.Tk):
         ancho_menu = 20
         alto_menu = 2
         font_awesome = font.Font(family='FontAwesome', size=15)
-         
-         # Etiqueta de perfil
-        # self.labelPerfil = tk.Label(
-        #     self.menu_lateral, image=self.perfil, bg=COLOR_MENU_LATERAL)
-        # self.labelPerfil.pack(side=tk.TOP, pady=10)
 
         # Botones del menú lateral
         
@@ -81,18 +76,15 @@ class SmartTVAppGUI(tk.Tk):
         self.buttonNetwork = tk.Button(self.menu_lateral)
 
         buttons_info = [
-            ("Home", "\uf109", self.buttonHome,self.abrir_home_screen ),
-            ("Red", "\uf013", self.buttonNetwork,self.abrir_network_screen)
+            ("Home", "\uf109", self.buttonHome, self.abrir_home_screen ),
+            ("Red", "\uf013", self.buttonNetwork, self.abrir_network_screen)
         ]
 
         for text, icon, button,comando in buttons_info:
             self.configurar_boton_menu(button, text, icon, font_awesome, ancho_menu, alto_menu,comando)                    
     
     def controles_cuerpo(self):
-        # Imagen en el cuerpo principal
-        # label = tk.Label(self.cuerpo_principal, image=self.logo,
-        #                  bg=COLOR_CUERPO_PRINCIPAL)
-        # label.place(x=0, y=0, relwidth=1, relheight=1)   
+        HomeScreen(self.cuerpo_principal)   
         pass     
   
     def configurar_boton_menu(self, button, text, icon, font_awesome, ancho_menu, alto_menu, comando):
