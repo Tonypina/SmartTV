@@ -27,7 +27,7 @@ class NetworkScreen():
         self.labelTitulo.pack(side=tk.TOP, fill='both', expand=True)
 
         self.selectedSSIDLabel = tk.Label(self.barra_der, text="")
-        self.labelTitulo.config(fg="#fff", font=(
+        self.selectedSSIDLabel.config(fg="#fff", font=(
             "Roboto", 10), bg=COLOR_CUERPO_PRINCIPAL, padx=10, width=20)
         self.selectedSSIDLabel.pack(side=tk.TOP, expand=True)
 
