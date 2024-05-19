@@ -57,4 +57,4 @@ class NetworkScreen():
 
     def on_leave(self, event, button):
         # Restaurar estilo al salir el ratón
-        button.config(w
+        button.config(width=self.button_width, height=self.button_height, fg='white')
