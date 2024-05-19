@@ -16,7 +16,7 @@ class SmartTVAppGUI:
         # Obtener la resolución del monitor
         self.screen_width = self.root.winfo_screenwidth()
         self.screen_height = self.root.winfo_screenheight()
-        self.root.geometry("%dx%d" % (screen_width, screen_height))
+        self.root.geometry("%dx%d" % (self.screen_width, self.screen_height))
 
 
         # Inicializar variables para el fondo
