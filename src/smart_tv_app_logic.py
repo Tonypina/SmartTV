@@ -9,7 +9,7 @@ class SmartTVAppLogic:
     def __init__(self, screen_width, screen_height):
         self.media_player = None
         self.media_thread = None
-        self.screen_width = screen_width
+        self.screen_width = screen_width + 1
         self.screen_height = screen_height
 
     def open_netflix_kiosk(self): 
