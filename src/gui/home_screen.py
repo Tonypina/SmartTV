@@ -31,9 +31,9 @@ class HomeScreen():
         for text, img, button, command in buttons_info:
             self.buttons_config(text, img, button, self.button_font, self.button_width, self.button_height, command)
 
-    def buttons_config(self, text, img, button, self.button_font, self.button_width, self.button_height, command):
-        button.config(text=f"{text}", image=img, anchor="center", font=self.button_font,
-                      bd=0, bg=COLOR_CUERPO_PRINCIPAL, fg="white", width=self.button_width, height=self.button_height,
+    def buttons_config(self, text, img, button, button_font, button_width, button_height, command):
+        button.config(text=f"{text}", image=img, anchor="center", font=button_font,
+                      bd=0, bg=COLOR_CUERPO_PRINCIPAL, fg="white", width=button_width, height=button_height,
                       highlightthickness = 0,
                       command = command)
         button.pack(side=tk.LEFT, expand=True)
