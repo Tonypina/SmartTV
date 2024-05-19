@@ -151,25 +151,25 @@ class SmartTVAppLogic:
     def display_available_networks(self):
         import subprocess
 
-def get_wifi_ssids():
-    # Ejecuta el comando para listar las redes Wi-Fi disponibles
-    resultado = subprocess.run(['nmcli', '-t', '-f', 'SSID', 'dev', 'wifi'], capture_output=True, text=True)
-    
-    # Verifica si el comando se ejecutó correctamente
-    if resultado.returncode != 0:
-        raise Exception("Error al ejecutar el comando de red")
+    def get_wifi_ssids():
+        # Ejecuta el comando para listar las redes Wi-Fi disponibles
+        resultado = subprocess.run(['nmcli', '-t', '-f', 'SSID', 'dev', 'wifi'], capture_output=True, text=True)
+        
+        # Verifica si el comando se ejecutó correctamente
+        if resultado.returncode != 0:
+            raise Exception("Error al ejecutar el comando de red")
 
-    # Divide la salida del comando en líneas y filtra líneas vacías
-    lineas = [linea.strip() for linea in resultado.stdout.split('\n') if linea.strip()]
-    
-    # Inicializa una lista para almacenar las redes encontradas
-    redes = []
+        # Divide la salida del comando en líneas y filtra líneas vacías
+        lineas = [linea.strip() for linea in resultado.stdout.split('\n') if linea.strip()]
+        
+        # Inicializa una lista para almacenar las redes encontradas
+        redes = []
 
-    # Recorre las líneas y agrega las redes a la lista
-    for linea in lineas:
-        redes.append(linea)
+        # Recorre las líneas y agrega las redes a la lista
+        for linea in lineas:
+            redes.append(linea)
 
-    return redes
+        return redes
 
     def connect_to_network(self, network, password):
         # Simulación de conexión a una red

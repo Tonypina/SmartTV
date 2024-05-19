@@ -6,7 +6,7 @@ class NetworkScreen():
 
     def __init__(self, panel_principal, app_logic):
 
-        self.wifi_ssids = app_logic.get_wifi_siids()
+        self.wifi_ssids = app_logic.get_wifi_ssids()
 
         # Crear paneles: barra sup
         self.barra_sup = tk.Frame(panel_principal)
