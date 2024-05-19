@@ -8,9 +8,9 @@ class HomeScreen():
 
     def __init__(self, panel_principal, app_logic):
         
-        button_width = 200
-        button_height = 200
-        button_font = font.Font(family='FontAwesome', size=15)
+        self.button_width = 200
+        self.button_height = 200
+        self.button_font = font.Font(family='FontAwesome', size=15)
 
         self.buttonNetflix = tk.Button( panel_principal )
         self.nextflixImg = util_img.leer_imagen("./../src/img/Netflix.png", (200, 200))
@@ -29,11 +29,11 @@ class HomeScreen():
         ]
 
         for text, img, button, command in buttons_info:
-            self.buttons_config(text, img, button, button_font, button_width, button_height, command)
+            self.buttons_config(text, img, button, self.button_font, self.button_width, self.button_height, command)
 
-    def buttons_config(self, text, img, button, button_font, button_width, button_height, command):
-        button.config(text=f"{text}", image=img, anchor="center", font=button_font,
-                      bd=0, bg=COLOR_CUERPO_PRINCIPAL, fg="white", width=button_width, height=button_height,
+    def buttons_config(self, text, img, button, self.button_font, self.button_width, self.button_height, command):
+        button.config(text=f"{text}", image=img, anchor="center", font=self.button_font,
+                      bd=0, bg=COLOR_CUERPO_PRINCIPAL, fg="white", width=self.button_width, height=self.button_height,
                       highlightthickness = 0,
                       command = command)
         button.pack(side=tk.LEFT, expand=True)
@@ -46,8 +46,8 @@ class HomeScreen():
 
     def on_enter(self, event, button):
         # Cambiar estilo al pasar el ratón por encima
-        button.config(bg=COLOR_MENU_CURSOR_ENCIMA, fg='white')
+        button.config(width=self.button_width + 20, height=self.button_height + 20, fg='white')
 
     def on_leave(self, event, button):
         # Restaurar estilo al salir el ratón
-        button.config(bg=COLOR_MENU_LATERAL, fg='white')
+        button.config(width=self.button_width, height=self.button_height, fg='white')
