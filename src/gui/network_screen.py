@@ -29,7 +29,7 @@ class NetworkScreen():
         for network in self.wifi_ssids:
             self.ssids_config(network)
     
-        self.selectedSSIDLabel = tk.Label(self.barra_der)
+        self.selectedSSIDLabel = tk.Label(self.barra_der, text="")
         self.selectedSSIDLabel.pack()
 
     def ssids_config(self, ssid):
