@@ -16,14 +16,15 @@ class SmartTVAppGUI(tk.Tk):
         # self.perfil = util_img.leer_imagen("./src/img/Perfil.png", (100, 100))
         # self.img_sitio_construccion = util_img.leer_imagen("./src/img/sitio_construccion.png", (200, 200))
         # self.bind('<KeyPress>', self.handle_keypress)
+
+        self.app_logic = SmartTVAppLogic(self.winfo_screenwidth(), self.winfo_screenheight())
+
         self.config_window()
         self.paneles()
         self.controles_barra_superior()        
         self.controles_menu_lateral()
-        self.controles_cuerpo()
+        self.controles_cuerpo(self.app_logic)
         self.bind('<Escape>', self.exit_app)
-
-        self.app_logic = SmartTVAppLogic(self.winfo_screenwidth(), self.winfo_screenheight())
     
     def config_window(self):
         # Configuración inicial de la ventana
@@ -85,8 +86,8 @@ class SmartTVAppGUI(tk.Tk):
         for text, icon, button,comando in buttons_info:
             self.configurar_boton_menu(button, text, icon, font_awesome, ancho_menu, alto_menu,comando)                    
     
-    def controles_cuerpo(self):
-        HomeScreen(self.cuerpo_principal)
+    def controles_cuerpo(self, app_logic):
+        HomeScreen(self.cuerpo_principal, app_logic)
   
     def configurar_boton_menu(self, button, text, icon, font_awesome, ancho_menu, alto_menu, comando):
         button.config(text=f"  {icon}    {text}", anchor="w", font=font_awesome,
