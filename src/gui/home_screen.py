@@ -15,7 +15,7 @@ class HomeScreen():
         self.buttonNetflix = tk.Button( panel_principal )
 
         buttons_info = [
-            ("Netflix", util_img.leer_imagen("./../src/img/Netflix.png", (100, 100)), self.buttonNetflix, app_logic.open_netflix_kiosk)
+            ("Netflix", util_img.leer_imagen("./../src/img/Netflix.png", (500, 500)), self.buttonNetflix, app_logic.open_netflix_kiosk)
         ]
 
         for text, img, button, command in buttons_info:
