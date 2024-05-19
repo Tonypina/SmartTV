@@ -15,12 +15,12 @@ class SmartTVAppGUI(tk.Tk):
         # self.perfil = util_img.leer_imagen("./src/img/Perfil.png", (100, 100))
         # self.img_sitio_construccion = util_img.leer_imagen("./src/img/sitio_construccion.png", (200, 200))
         # self.bind('<KeyPress>', self.handle_keypress)
-        self.bind('<Escape>', self.exit_app)
         self.config_window()
         self.paneles()
         self.controles_barra_superior()        
         self.controles_menu_lateral()
         self.controles_cuerpo()
+        self.bind('<Escape>', self.exit_app)
     
     def config_window(self):
         # Configuración inicial de la ventana
