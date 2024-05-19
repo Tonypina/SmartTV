@@ -58,12 +58,12 @@ class SmartTVAppGUI:
             button.image = self.load_image(button_info["icon"], 100, 100)
             button.config(image=button.image)
             button.grid(row=2, column=i+1, padx=10, pady=10)
-            self.buttons.append(button)
+            # self.buttons.append(button)
 
     def show_home(self):
         # Limpiar el área de contenido
-        # for widget in self.root.winfo_children():
-        #     widget.destroy()
+        for widget in self.root.winfo_children():
+            widget.destroy()
 
         # Crear el sidebar
         self.sidebar = ttk.Frame(self.root, relief="raised", padding=(10, 10))
