@@ -8,8 +8,8 @@ class HomeScreen():
 
     def __init__(self, panel_principal, app_logic):
         
-        button_width = 50
-        button_height = 10
+        button_width = 500
+        button_height = 500
         button_font = font.Font(family='FontAwesome', size=15)
 
         self.buttonNetflix = tk.Button( panel_principal )
