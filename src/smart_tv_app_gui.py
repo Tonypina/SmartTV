@@ -20,9 +20,9 @@ class SmartTVAppGUI:
 
         # Crear botones de acceso (Home)
         self.buttons = []
-        self.create_home_buttons()
+        # self.create_home_buttons()
 
-        self.show_home()
+        # self.show_home()
 
         # Inicializar variables para el fondo
         self.bg_paths = ["background1.jpg", "background2.jpg", "background3.jpg"]
