@@ -10,7 +10,7 @@ from gui.network_screen import NetworkScreen
 class SmartTVAppGUI(tk.Tk):
 
     def __init__(self):
-        # super().__init__()
+        super().__init__()
         # self.logo = util_img.leer_imagen("./src/img/logo.png", (560, 136))
         # self.perfil = util_img.leer_imagen("./src/img/Perfil.png", (100, 100))
         # self.img_sitio_construccion = util_img.leer_imagen("./src/img/sitio_construccion.png", (200, 200))
