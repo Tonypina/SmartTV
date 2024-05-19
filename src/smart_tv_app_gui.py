@@ -28,6 +28,8 @@ class SmartTVAppGUI:
         self.root.bind("<Configure>", self.resize_background)
         self.update_background()
 
+        self.buttons = []
+
         self.show_home()
 
         # Añadir la hora en la parte superior derecha
