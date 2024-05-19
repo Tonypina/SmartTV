@@ -6,23 +6,32 @@ class NetworkScreen():
 
     def __init__(self, panel_principal, app_logic):
 
-        # Crear paneles: barra superior
-        self.barra_superior = tk.Frame( panel_principal)
-        self.barra_superior.pack(side=tk.TOP, fill=tk.X, expand=False) 
+        self.wifi_ssids = app_logic.get_wifi_siids()
 
-        # Crear paneles: barra inferior
-        self.barra_inferior = tk.Frame( panel_principal)
-        self.barra_inferior.pack(side=tk.BOTTOM, fill='both', expand=True)  
+        # Crear paneles: barra sup
+        self.barra_sup = tk.Frame(panel_principal)
+        self.barra_sup.pack(side=tk.TOP, fill=tk.X, expand=False) 
+        
+        # Crear paneles: barra izquierda
+        self.barra_izq = tk.Frame(panel_principal)
+        self.barra_izq.pack(side=tk.LEFT, fill=both, expand=True) 
+
+        # Crear paneles: barra der
+        self.barra_der = tk.Frame(panel_principal)
+        self.barra_der.pack(side=tk.RIGHT, fill=tk.Y, expand=False)  
 
         # Primer Label con texto
         self.labelTitulo = tk.Label(
-            self.barra_superior, text="Página en construcción")
+            self.barra_sup, text="Configuración de Red")
         self.labelTitulo.config(fg="#222d33", font=("Roboto", 30), bg=COLOR_CUERPO_PRINCIPAL)
         self.labelTitulo.pack(side=tk.TOP, fill='both', expand=True)
 
-        # Segundo Label con la imagen
-        self.label_imagen = tk.Label(self.barra_inferior, image=logo)
-        self.label_imagen.place(x=0, y=0, relwidth=1, relheight=1)
-        self.label_imagen.config(fg="#fff", font=("Roboto", 10), bg=COLOR_CUERPO_PRINCIPAL)
+        for network in self.wifi_ssids:
+            self.ssids_config(network)
+    
+    def ssids_config(ssid):
+        ssidLabel = tk.Button(self.barra_izq, text=ssid, anchor="w", bd=0, fg="white", command=self.select_ssid)
+        ssidLabel.pack()
 
-        
+    def select_ssid():
+        pass

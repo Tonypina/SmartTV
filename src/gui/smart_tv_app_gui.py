@@ -7,6 +7,7 @@ from util.smart_tv_app_logic import SmartTVAppLogic
 # Nuevo
 from gui.home_screen import HomeScreen
 from gui.network_screen import NetworkScreen
+from gui.usb_screen import USBScreen
 
 class SmartTVAppGUI(tk.Tk):
 
@@ -74,13 +75,14 @@ class SmartTVAppGUI(tk.Tk):
         font_awesome = font.Font(family='FontAwesome', size=15)
 
         # Botones del menú lateral
-        
         self.buttonHome = tk.Button(self.menu_lateral)        
         self.buttonNetwork = tk.Button(self.menu_lateral)
+        self.buttonUSB = tk.Button(self.menu_lateral)
 
         buttons_info = [
             ("Home", "\uf109", self.buttonHome, self.abrir_home_screen ),
-            ("Red", "\uf013", self.buttonNetwork, self.abrir_network_screen)
+            ("Reproducir disco extraible", "\uf013", self.buttonUSB, self.abrir_usb_screen)
+            ("Configuración de Red", "\uf013", self.buttonNetwork, self.abrir_network_screen)
         ]
 
         for text, icon, button,comando in buttons_info:
@@ -123,6 +125,10 @@ class SmartTVAppGUI(tk.Tk):
     def abrir_network_screen(self):   
         self.limpiar_panel(self.cuerpo_principal, self.app_logic)     
         NetworkScreen(self.cuerpo_principal) 
+        
+    def abrir_usb_screen(self):   
+        self.limpiar_panel(self.cuerpo_principal, self.app_logic)     
+        USBScreen(self.cuerpo_principal) 
 
     def limpiar_panel(self,panel):
     # Función para limpiar el contenido del panel
