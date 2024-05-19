@@ -28,10 +28,39 @@ class SmartTVAppGUI:
         self.root.bind("<Configure>", self.resize_background)
         self.update_background()
 
-        root.columnconfigure(0, weight=1)
-        root.columnconfigure(1, weight=3)
+        self.buttons = []
+        self.create_home_buttons()
 
-        self.show_home()
+        # Configurar la geometría de la ventana
+        root.grid_rowconfigure(0, weight=1)
+        root.grid_rowconfigure(4, weight=1)
+        root.grid_columnconfigure(list(range(len(self.buttons)+2)), weight=1)
+
+        # Crear botones de acceso (Home)
+        
+        # Crear el sidebar
+        self.sidebar = ttk.Frame(self.root, height=self.screen_height, relief="raised", padding=(10, 10))
+        self.sidebar.grid(row=0, column=0, sticky="nsew")
+
+        # Crear los botones del sidebar
+        self.home_button = ttk.Button(self.sidebar, text="Home", command=self.show_home)
+        self.home_button.grid(row=0, column=0, sticky="ew", pady=5)
+        self.network_button = ttk.Button(self.sidebar, text="Red", command=self.show_network)
+        self.network_button.grid(row=1, column=0, sticky="ew", pady=5)
+
+
+        # Establecer estilos para los botones
+        style = ttk.Style()
+        style.configure("WhiteButton.TButton", background="white", foreground="black", bordercolor="white")
+
+        # Añadir título en la parte superior izquierda
+        title_label = tk.Label(root, text="MaFE TV", font=("Helvetica", 30), fg="black", bg=root.cget("bg"))
+        title_label.grid(row=0, column=1, padx=10, pady=10, sticky="w")
+
+        # Añadir la hora en la parte superior derecha
+        self.time_label = tk.Label(root, text="", font=("Helvetica", 24), fg="black", bg=root.cget("bg"))
+        self.time_label.grid(row=0, column=len(self.buttons), padx=10, pady=10, sticky="e")
+        self.update_time()
 
         # Estado para rastrear la posición actual del cursor
         self.current_button_index = 0
@@ -58,12 +87,15 @@ class SmartTVAppGUI:
             button.image = self.load_image(button_info["icon"], 100, 100)
             button.config(image=button.image)
             button.grid(row=2, column=i+1, padx=10, pady=10)
-            # self.buttons.append(button)
+            self.buttons.append(button)
 
     def show_home(self):
         # Limpiar el área de contenido
         for widget in self.root.winfo_children():
             widget.destroy()
+
+        # Mostrar los botones de acceso para la página de inicio (Home)
+        self.create_home_buttons()
 
         # Crear el sidebar
         self.sidebar = ttk.Frame(self.root, relief="raised", padding=(10, 10))
@@ -75,13 +107,6 @@ class SmartTVAppGUI:
         self.home_button.grid(row=0, column=0, sticky="ew", pady=(self.screen_height // 2 - 100, 5))  # Centrar verticalmente
         self.network_button = ttk.Button(self.sidebar, text="Red", command=self.show_network)
         self.network_button.grid(row=1, column=0, sticky="ew", pady=5)  # Ajustar el espaciado
-
-        # Mostrar los botones de acceso para la página de inicio (Home)
-        self.create_home_buttons()
-
-        # Establecer estilos para los botones
-        style = ttk.Style()
-        style.configure("WhiteButton.TButton", background="white", foreground="black", bordercolor="white")
 
         self.update_background()  # Actualizar el fondo
 
