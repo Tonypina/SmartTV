@@ -39,7 +39,7 @@ class NetworkScreen():
     def ssids_config(self, ssid):
         ssidLabel = tk.Button(self.barra_izq, font=(
             "Roboto", 20), text=ssid, anchor="w", bd=0, fg="#222d33", command=self.select_ssid(ssid), 
-            highlightthickness = 0, bg=COLOR_CUERPO_PRINCIPAL, pady=10)
+            bg=COLOR_CUERPO_PRINCIPAL, pady=10)
         ssidLabel.pack()
 
     def select_ssid(self, ssid):
