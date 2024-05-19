@@ -15,30 +15,11 @@ class HomeScreen():
         self.buttonNetflix = tk.Button( panel_principal )
 
         buttons_info = [
-            ("Netflix", util_img.leer_imagen("./src/Netflix.png", (100, 100)), self.buttonNetflix, app_logic.open_netflix_kiosk)
+            ("Netflix", util_img.leer_imagen("./src/img/Netflix.png", (100, 100)), self.buttonNetflix, app_logic.open_netflix_kiosk)
         ]
 
         for text, img, button, command in buttons_info:
             self.buttons_config(text, img, button, button_font, button_width, button_height, command)
-
-        # Crear paneles: barra superior
-        # self.barra_superior = tk.Frame( panel_principal)
-        # self.barra_superior.pack(side=tk.TOP, fill=tk.X, expand=False) 
-
-        # # Crear paneles: barra inferior
-        # self.barra_inferior = tk.Frame( panel_principal)
-        # self.barra_inferior.pack(side=tk.BOTTOM, fill='both', expand=True)  
-
-        # # Primer Label con texto
-        # self.labelTitulo = tk.Label(
-        #     self.barra_superior, text="Página en construcción")
-        # self.labelTitulo.config(fg="#222d33", font=("Roboto", 30), bg=COLOR_CUERPO_PRINCIPAL)
-        # self.labelTitulo.pack(side=tk.TOP, fill='both', expand=True)
-
-        # # Segundo Label con la imagen
-        # self.label_imagen = tk.Label(self.barra_inferior, image=logo)
-        # self.label_imagen.place(x=0, y=0, relwidth=1, relheight=1)
-        # self.label_imagen.config(fg="#fff", font=("Roboto", 10), bg=COLOR_CUERPO_PRINCIPAL)
 
     def buttons_config(self, text, img, button, button_font, button_width, button_height, command):
         button.config(text=f"{text}", image=img, anchor="center", font=button_font,
