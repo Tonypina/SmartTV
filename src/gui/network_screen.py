@@ -40,4 +40,5 @@ class NetworkScreen():
 
     def select_ssid(self, ssid):
         self.selectedSSIDLabel.config(text=ssid)
+        self.selectedSSIDLabel.pack(side=tk.TOP, expand=True)
         pass
