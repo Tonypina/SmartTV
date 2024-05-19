@@ -33,7 +33,7 @@ class SmartTVAppGUI:
         self.create_home_buttons()
 
         # Crear el sidebar
-        self.sidebar = ttk.Frame(self.root, width=100, relief="raised", padding=(10, 10))
+        self.sidebar = ttk.Frame(self.root, relief="raised", padding=(10, 10))
         self.sidebar.grid(row=0, column=0, sticky="nsew")
 
         # Crear los botones del sidebar
@@ -93,7 +93,7 @@ class SmartTVAppGUI:
             widget.destroy()
 
         # Crear el sidebar
-        self.sidebar = ttk.Frame(self.root, width=100, relief="raised", padding=(10, 10))
+        self.sidebar = ttk.Frame(self.root, relief="raised", padding=(10, 10))
         self.sidebar.grid(row=0, column=0, sticky="nsew")
 
         # Crear los botones del sidebar
@@ -136,7 +136,7 @@ class SmartTVAppGUI:
             widget.destroy()
 
         # Crear el sidebar
-        self.sidebar = ttk.Frame(self.root, width=100, relief="raised", padding=(10, 10))
+        self.sidebar = ttk.Frame(self.root, relief="raised", padding=(10, 10))
         self.sidebar.grid(row=0, column=0, sticky="nsew")
 
         # Crear los botones del sidebar
