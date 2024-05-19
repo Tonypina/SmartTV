@@ -1,14 +1,22 @@
 import tkinter as tk
 from tkinter import ttk, filedialog
+from PIL import Image, ImageTk
+import os
+import time
 
 class SmartTVAppGUI:
     def __init__(self, root, app_logic):
         self.root = root
         self.app_logic = app_logic
-
-        # Configuración de la ventana principal
         self.root.title("Smart TV Interface")
         self.root.attributes('-fullscreen', True)
+        self.root.bind('<Escape>', self.exit_app)
+        self.root.bind('<Control-q>', self.exit_app)
+
+        # Obtener la resolución del monitor
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+        self.root.geometry("%dx%d" % (screen_width, screen_height))
 
         # Crear el sidebar
         self.sidebar = ttk.Frame(root, width=200, relief="raised", padding=(10, 10))
@@ -20,72 +28,264 @@ class SmartTVAppGUI:
         self.network_button = ttk.Button(self.sidebar, text="Red", command=self.show_network)
         self.network_button.grid(row=1, column=0, sticky="ew", pady=5)
 
-        # Inicializar el área de contenido
-        self.content_area = ttk.Frame(root, relief="raised", padding=(10, 10))
-        self.content_area.grid(row=0, column=1, sticky="nsew")
+        # Inicializar variables para el fondo
+        self.bg_paths = ["background1.jpg", "background2.jpg", "background3.jpg"]
+        self.bg_images = [self.load_image(path, screen_width, screen_height) for path in self.bg_paths]
+        self.current_bg_index = 0
+        self.bg_label = tk.Label(root)
+        self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+        self.root.bind("<Configure>", self.resize_background)
+        self.update_background()
 
-        # Mostrar la interfaz de inicio por defecto
-        self.show_home()
+        # Crear botones de acceso (Home)
+        self.buttons = []
+        self.create_home_buttons()
+
+        # Configurar la geometría de la ventana
+        root.grid_rowconfigure(0, weight=1)
+        root.grid_rowconfigure(4, weight=1)
+        root.grid_columnconfigure(list(range(len(self.buttons))), weight=1)
+
+        # Establecer estilos para los botones
+        style = ttk.Style()
+        style.configure("WhiteButton.TButton", background="white", foreground="black", bordercolor="white")
+
+        # Añadir título en la parte superior izquierda
+        title_label = tk.Label(root, text="Smart TV", font=("Helvetica", 30), fg="black", bg=root.cget("bg"))
+        title_label.grid(row=0, column=0, padx=10, pady=10, sticky="w")
+
+        # Añadir la hora en la parte superior derecha
+        self.time_label = tk.Label(root, text="", font=("Helvetica", 24), fg="black", bg=root.cget("bg"))
+        self.time_label.grid(row=0, column=len(self.buttons)-1, padx=10, pady=10, sticky="e")
+        self.update_time()
+
+        # Estado para rastrear la posición actual del cursor
+        self.current_button_index = 0
+
+        # Lógica para manejar la entrada del teclado universal
+        self.root.bind('<KeyPress>', self.handle_keypress)
+
+        # Configurar estilos para los botones seleccionados
+        style.configure("SelectedButton.TButton", background="yellow", foreground="black", bordercolor="white")
+
+    def create_home_buttons(self):
+        # Crear botones de acceso (Home)
+        buttons_info = [
+            {"name": "Netflix", "icon": "netflix.png", "command": self.app_logic.open_netflix_kiosk},
+            {"name": "YouTube", "icon": "youtube.png", "command": self.app_logic.open_youtube_kiosk},
+            {"name": "Google", "icon": "google.png", "command": self.app_logic.open_google_kiosk},
+            {"name": "Reproducir", "icon": "usb.png", "command": self.app_logic.play_usb_content},
+            {"name": "Reproducir con VLC", "icon": "vlc.png", "command": self.app_logic.play_vlc_content}
+        ]
+
+        for i, button_info in enumerate(buttons_info):
+            button = ttk.Button(self.root, text=button_info["name"], compound=tk.TOP, style="WhiteButton.TButton",
+                                command=button_info["command"])
+            button.image = self.load_image(button_info["icon"], 100, 100)
+            button.config(image=button.image)
+            button.grid(row=2, column=i, padx=10, pady=10)
+            self.buttons.append(button)
 
     def show_home(self):
         # Limpiar el área de contenido
-        for widget in self.content_area.winfo_children():
+        for widget in self.root.winfo_children():
             widget.destroy()
 
-        # Crear y mostrar la interfaz de inicio
-        self.home_label = ttk.Label(self.content_area, text="Interfaz de Inicio")
-        self.home_label.pack(expand=True, fill="both")
+        # Crear el sidebar y los botones de acceso para la página de inicio (Home)
+        self.create_home_buttons()
+
+        # Configurar la geometría de la ventana
+        self.root.grid_rowconfigure(0, weight=1)
+        self.root.grid_rowconfigure(4, weight=1)
+        self.root.grid_columnconfigure(list(range(len(self.buttons))), weight=1)
+
+        # Establecer estilos para los botones
+        style = ttk.Style()
+        style.configure("WhiteButton.TButton", background="white", foreground="black", bordercolor="white")
+
+        # Añadir título en la parte superior izquierda
+        title_label = tk.Label(self.root, text="Smart TV", font=("Helvetica", 30), fg="black", bg=self.root.cget("bg"))
+        title_label.grid(row=0, column=0, padx=10, pady=10, sticky="w")
+
+        # Añadir la hora en la parte superior derecha
+        self.time_label = tk.Label(self.root, text="", font=("Helvetica", 24), fg="black", bg=self.root.cget("bg"))
+        self.time_label.grid(row=0, column=len(self.buttons)-1, padx=10, pady=10, sticky="e")
+        self.update_time()
+
+        # Estado para rastrear la posición actual del cursor
+        self.current_button_index = 0
+
+        # Lógica para manejar la entrada del teclado universal
+        self.root.bind('<KeyPress>', self.handle_keypress)
+
+        # Configurar estilos para los botones seleccionados
+        style.configure("SelectedButton.TButton", background="yellow", foreground="black", bordercolor="white")
+
+    def create_home_buttons(self):
+        # Crear botones de acceso (Home)
+        buttons_info = [
+            {"name": "Netflix", "icon": "netflix.png", "command": self.app_logic.open_netflix_kiosk},
+            {"name": "YouTube", "icon": "youtube.png", "command": self.app_logic.open_youtube_kiosk},
+            {"name": "Google", "icon": "google.png", "command": self.app_logic.open_google_kiosk},
+            {"name": "Reproducir", "icon": "usb.png", "command": self.app_logic.play_usb_content},
+            {"name": "Reproducir con VLC", "icon": "vlc.png", "command": self.app_logic.play_vlc_content}
+        ]
+
+        for i, button_info in enumerate(buttons_info):
+            button = ttk.Button(self.root, text=button_info["name"], compound=tk.TOP, style="WhiteButton.TButton",
+                                command=button_info["command"])
+            button.image = self.load_image(button_info["icon"], 100, 100)
+            button.config(image=button.image)
+            button.grid(row=2, column=i, padx=10, pady=10)
+            self.buttons.append(button)
+
+    def show_home(self):
+        # Limpiar el área de contenido
+        for widget in self.root.winfo_children():
+            widget.destroy()
+
+        # Crear el sidebar
+        self.sidebar = ttk.Frame(self.root, width=200, relief="raised", padding=(10, 10))
+        self.sidebar.grid(row=0, column=0, sticky="nsew")
+
+        # Crear los botones del sidebar
+        self.home_button = ttk.Button(self.sidebar, text="Home", command=self.show_home)
+        self.home_button.grid(row=0, column=0, sticky="ew", pady=5)
+        self.network_button = ttk.Button(self.sidebar, text="Red", command=self.show_network)
+        self.network_button.grid(row=1, column=0, sticky="ew", pady=5)
+
+        # Mostrar los botones de acceso para la página de inicio (Home)
+        self.create_home_buttons()
+
+        # Actualizar la geometría de la ventana
+        self.root.update_idletasks()
+
+        # Establecer estilos para los botones
+        style = ttk.Style()
+        style.configure("WhiteButton.TButton", background="white", foreground="black", bordercolor="white")
+
+        # Añadir título en la parte superior izquierda
+        title_label = tk.Label(self.root, text="Smart TV", font=("Helvetica", 30), fg="black", bg=self.root.cget("bg"))
+        title_label.grid(row=0, column=0, padx=10, pady=10, sticky="w")
+
+        # Añadir la hora en la parte superior derecha
+        self.time_label = tk.Label(self.root, text="", font=("Helvetica", 24), fg="black", bg=self.root.cget("bg"))
+        self.time_label.grid(row=0, column=len(self.buttons)-1, padx=10, pady=10, sticky="e")
+        self.update_time()
+
+        # Estado para rastrear la posición actual del cursor
+        self.current_button_index = 0
+
+        # Lógica para manejar la entrada del teclado universal
+        self.root.bind('<KeyPress>', self.handle_keypress)
+
+        # Configurar estilos para los botones seleccionados
+        style.configure("SelectedButton.TButton", background="yellow", foreground="black", bordercolor="white")
 
     def show_network(self):
         # Limpiar el área de contenido
-        for widget in self.content_area.winfo_children():
+        for widget in self.root.winfo_children():
             widget.destroy()
 
-        # Mostrar las redes disponibles
-        available_networks = self.app_logic.display_available_networks()
-        if available_networks:
-            self.network_label = ttk.Label(self.content_area, text="Redes Disponibles:")
-            self.network_label.pack(expand=True, fill="both")
+        # Crear el sidebar
+        self.sidebar = ttk.Frame(self.root, width=200, relief="raised", padding=(10, 10))
+        self.sidebar.grid(row=0, column=0, sticky="nsew")
 
-            # Crear y mostrar los botones para las redes disponibles
-            for network in available_networks:
-                network_button = ttk.Button(self.content_area, text=network, command=lambda n=network: self.connect_to_network(n))
-                network_button.pack(expand=True, fill="both")
+        # Crear los botones del sidebar
+        self.home_button = ttk.Button(self.sidebar, text="Home", command=self.show_home)
+        self.home_button.grid(row=0, column=0, sticky="ew", pady=5)
+        self.network_button = ttk.Button(self.sidebar, text="Red", command=self.show_network)
+        self.network_button.grid(row=1, column=0, sticky="ew", pady=5)
+        
+            # Mostrar la lista de redes disponibles
+        self.app_logic.display_available_networks()
 
-            # Agregar un campo de entrada para la contraseña
-            self.password_entry = ttk.Entry(self.content_area, show="*")
-            self.password_entry.pack(expand=True, fill="both")
+        # Crear un entry para que el usuario escriba la contraseña
+        self.password_entry = ttk.Entry(self.root, show="*")
+        self.password_entry.grid(row=2, column=1, padx=10, pady=10, sticky="ew")
 
-            # Botón para conectar a la red seleccionada
-            connect_button = ttk.Button(self.content_area, text="Conectar", command=self.connect_to_selected_network)
-            connect_button.pack(expand=True, fill="both")
-        else:
-            no_networks_label = ttk.Label(self.content_area, text="No se encontraron redes disponibles")
-            no_networks_label.pack(expand=True, fill="both")
+        # Crear un botón para conectarse a la red seleccionada
+        connect_button = ttk.Button(self.root, text="Conectar", command=self.connect_to_network)
+        connect_button.grid(row=2, column=2, padx=10, pady=10)
 
-    def connect_to_network(self, network):
-        # Al seleccionar una red, mostrar el nombre de la red seleccionada
-        self.selected_network_label = ttk.Label(self.content_area, text=f"Conectar a la red: {network}")
-        self.selected_network_label.pack(expand=True, fill="both")
-
-        # Guardar el nombre de la red seleccionada
-        self.selected_network = network
-
-    def connect_to_selected_network(self):
-        # Obtener la contraseña ingresada por el usuario
+    def connect_to_network(self):
+        # Obtener la red seleccionada y la contraseña ingresada
+        selected_network = self.app_logic.selected_network.get()
         password = self.password_entry.get()
 
-        # Conectar a la red seleccionada con la contraseña proporcionada
-        if hasattr(self, "selected_network") and password:
-            self.app_logic.connect_to_network(self.selected_network, password)
+        # Llamar al método para conectarse a la red
+        self.app_logic.connect_to_network(selected_network, password)
 
-# Clase para la lógica de la aplicación
-class SmartTVAppLogic:
-    def display_available_networks(self):
-        # Simulación de búsqueda de redes disponibles
-        return ["Red1", "Red2", "Red3"]
+    def resize_background(self, event):
+        img = self.bg_images[self.current_bg_index]
+        img = img.resize((event.width, event.height), Image.ANTIALIAS)
+        self.bg_images[self.current_bg_index] = ImageTk.PhotoImage(img)
+        self.bg_label.configure(image=self.bg_images[self.current_bg_index])
 
-    def connect_to_network(self, network, password):
-        # Simulación de conexión a una red
-        print(f"Conectando a la red '{network}' con la contraseña '{password}'")
+    def update_background(self):
+        self.current_bg_index = (self.current_bg_index + 1) % len(self.bg_images)
+        self.bg_label.configure(image=self.bg_images[self.current_bg_index])
+        self.root.after(5000, self.update_background)
+
+    def update_time(self):
+        current_time = time.strftime("%H:%M:%S")
+        self.time_label.config(text=current_time)
+        self.root.after(1000, self.update_time)
+
+    def load_image(self, path, width, height):
+        img = Image.open(path)
+        img = img.resize((width, height), Image.ANTIALIAS)
+        return ImageTk.PhotoImage(img)
+
+    def handle_keypress(self, event):
+        key = event.keysym.lower()
+
+        if key == 'a':
+            self.move_left()
+        elif key == 'd':
+            self.move_right()
+        elif key == 'w':
+            self.move_up()
+        elif key == 's':
+            self.move_down()
+        elif key == 'return':
+            self.select_application()
+        elif key == 'm':
+            self.app_logic.show_media_player_interface()
+        elif key == 'q':
+            if self.app_logic.media_player:
+                self.app_logic.stop_media_player()
+                self.root.deiconify()  # Mostrar la ventana principal después de salir del reproductor multimedia
+
+    def move_left(self):
+        self.current_button_index = (self.current_button_index - 1) % len(self.buttons)
+        self.highlight_current_button()
+
+    def move_right(self):
+        self.current_button_index = (self.current_button_index + 1) % len(self.buttons)
+        self.highlight_current_button()
+
+    def move_up(self):
+        self.current_button_index = (self.current_button_index - len(self.buttons)) % len(self.buttons)
+        self.highlight_current_button()
+
+    def move_down(self):
+        self.current_button_index = (self.current_button_index + len(self.buttons)) % len(self.buttons)
+        self.highlight_current_button()
+
+    def select_application(self):
+        selected_button = self.buttons[self.current_button_index]
+        selected_button.invoke()
+
+    def highlight_current_button(self):
+        for i, button in enumerate(self.buttons):
+            if i == self.current_button_index:
+                button.configure(style="SelectedButton.TButton")
+            else:
+                button.configure(style="WhiteButton.TButton")
+
+    def exit_app(self, event=None):
+        self.app_logic.stop_media_player()  # Detener la reproducción antes de salir
+        self.root.destroy()
+
 
