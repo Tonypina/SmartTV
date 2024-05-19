@@ -14,15 +14,15 @@ class SmartTVAppLogic:
 
     def open_netflix_kiosk(self):
         url_servicios_video = "https://www.netflix.com"
-        os.system(f"chromium-browser --no-sandbox --start-fullscreen --window-size={self.screen_width},{self.screen_height} --kiosk {url_servicios_video}")
+        os.system(f"chromium-browser --no-sandbox --start-fullscreen --enable-chrome-browser-cloud-management --window-size={self.screen_width},{self.screen_height} --kiosk {url_servicios_video}")
 
     def open_youtube_kiosk(self):
         url_servicios_video = "https://www.youtube.com"
-        os.system(f"chromium-browser --no-sandbox --start-fullscreen --window-size={self.screen_width},{self.screen_height} --kiosk {url_servicios_video}")
+        os.system(f"chromium-browser --no-sandbox --start-fullscreen --enable-chrome-browser-cloud-management --window-size={self.screen_width},{self.screen_height} --kiosk {url_servicios_video}")
 
     def open_google_kiosk(self):
         url_servicios_video = "https://www.google.com"
-        os.system(f"chromium-browser --no-sandbox --start-fullscreen --window-size={self.screen_width},{self.screen_height} --kiosk {url_servicios_video}")
+        os.system(f"chromium-browser --no-sandbox --start-fullscreen --enable-chrome-browser-cloud-management --window-size={self.screen_width},{self.screen_height} --kiosk {url_servicios_video}")
 
     def play_usb_content(self):
         usb_path = filedialog.askdirectory(title="Seleccionar USB")
