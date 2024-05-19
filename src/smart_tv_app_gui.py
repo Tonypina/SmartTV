@@ -18,6 +18,15 @@ class SmartTVAppGUI:
         screen_height = self.root.winfo_screenheight()
         self.root.geometry("%dx%d" % (screen_width, screen_height))
 
+        # Crear el sidebar
+        self.sidebar = ttk.Frame(self.root, width=200, relief="raised", padding=(10, 10))
+        self.sidebar.grid(row=0, column=0, sticky="nsew")
+
+        # Crear los botones del sidebar
+        self.home_button = ttk.Button(self.sidebar, text="Home", command=self.show_home)
+        self.home_button.grid(row=0, column=0, sticky="ew", pady=5)
+        self.network_button = ttk.Button(self.sidebar, text="Red", command=self.show_network)
+        self.network_button.grid(row=1, column=0, sticky="ew", pady=5)
 
         # Inicializar variables para el fondo
         self.bg_paths = ["background1.jpg", "background2.jpg", "background3.jpg"]
@@ -32,15 +41,6 @@ class SmartTVAppGUI:
         self.buttons = []
         # self.create_home_buttons()
 
-        # Crear el sidebar
-        self.sidebar = ttk.Frame(self.root, width=200, relief="raised", padding=(10, 10))
-        self.sidebar.grid(row=0, column=0, sticky="nsew")
-
-        # Crear los botones del sidebar
-        self.home_button = ttk.Button(self.sidebar, text="Home", command=self.show_home)
-        self.home_button.grid(row=0, column=0, sticky="ew", pady=5)
-        self.network_button = ttk.Button(self.sidebar, text="Red", command=self.show_network)
-        self.network_button.grid(row=1, column=0, sticky="ew", pady=5)
 
         # Configurar la geometría de la ventana
         root.grid_rowconfigure(0, weight=1)
@@ -92,6 +92,26 @@ class SmartTVAppGUI:
         for widget in self.root.winfo_children():
             widget.destroy()
 
+        
+        # Crear el sidebar
+        self.sidebar = ttk.Frame(self.root, width=200, relief="raised", padding=(10, 10))
+        self.sidebar.grid(row=0, column=0, sticky="nsew")
+
+        # Crear los botones del sidebar
+        self.home_button = ttk.Button(self.sidebar, text="Home", command=self.show_home)
+        self.home_button.grid(row=0, column=0, sticky="ew", pady=5)
+        self.network_button = ttk.Button(self.sidebar, text="Red", command=self.show_network)
+        self.network_button.grid(row=1, column=0, sticky="ew", pady=5)
+
+        # Inicializar variables para el fondo
+        self.bg_paths = ["background1.jpg", "background2.jpg", "background3.jpg"]
+        self.bg_images = [self.load_image(path, screen_width, screen_height) for path in self.bg_paths]
+        self.current_bg_index = 0
+        self.bg_label = tk.Label(root)
+        self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+        self.root.bind("<Configure>", self.resize_background)
+        self.update_background()
+
         # Mostrar los botones de acceso para la página de inicio (Home)
         self.create_home_buttons()
 
@@ -124,6 +144,26 @@ class SmartTVAppGUI:
         # Limpiar el área de contenido
         for widget in self.root.winfo_children():
             widget.destroy()
+
+        
+        # Crear el sidebar
+        self.sidebar = ttk.Frame(self.root, width=200, relief="raised", padding=(10, 10))
+        self.sidebar.grid(row=0, column=0, sticky="nsew")
+
+        # Crear los botones del sidebar
+        self.home_button = ttk.Button(self.sidebar, text="Home", command=self.show_home)
+        self.home_button.grid(row=0, column=0, sticky="ew", pady=5)
+        self.network_button = ttk.Button(self.sidebar, text="Red", command=self.show_network)
+        self.network_button.grid(row=1, column=0, sticky="ew", pady=5)
+
+        # Inicializar variables para el fondo
+        self.bg_paths = ["background1.jpg", "background2.jpg", "background3.jpg"]
+        self.bg_images = [self.load_image(path, screen_width, screen_height) for path in self.bg_paths]
+        self.current_bg_index = 0
+        self.bg_label = tk.Label(root)
+        self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+        self.root.bind("<Configure>", self.resize_background)
+        self.update_background()
 
         # Mostrar la lista de redes disponibles
         self.app_logic.display_available_networks()
