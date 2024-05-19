@@ -71,9 +71,9 @@ class SmartTVAppGUI(tk.Tk):
         font_awesome = font.Font(family='FontAwesome', size=15)
          
          # Etiqueta de perfil
-        self.labelPerfil = tk.Label(
-            self.menu_lateral, image=self.perfil, bg=COLOR_MENU_LATERAL)
-        self.labelPerfil.pack(side=tk.TOP, pady=10)
+        # self.labelPerfil = tk.Label(
+        #     self.menu_lateral, image=self.perfil, bg=COLOR_MENU_LATERAL)
+        # self.labelPerfil.pack(side=tk.TOP, pady=10)
 
         # Botones del menú lateral
         
