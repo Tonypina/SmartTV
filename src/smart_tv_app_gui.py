@@ -52,11 +52,11 @@ class SmartTVAppGUI:
 
         # Añadir título en la parte superior izquierda
         title_label = tk.Label(root, text="Smart TV", font=("Helvetica", 30), fg="black", bg=root.cget("bg"))
-        title_label.grid(row=0, column=0, padx=10, pady=10, sticky="w")
+        title_label.grid(row=0, column=1, padx=10, pady=10, sticky="w")
 
         # Añadir la hora en la parte superior derecha
         self.time_label = tk.Label(root, text="", font=("Helvetica", 24), fg="black", bg=root.cget("bg"))
-        self.time_label.grid(row=0, column=len(self.buttons)-1, padx=10, pady=10, sticky="e")
+        self.time_label.grid(row=0, column=len(self.buttons), padx=10, pady=10, sticky="e")
         self.update_time()
 
         # Estado para rastrear la posición actual del cursor
@@ -100,7 +100,6 @@ class SmartTVAppGUI:
         self.home_button.grid(row=0, column=0, sticky="ew", pady=5)
         self.network_button = ttk.Button(self.sidebar, text="Red", command=self.show_network)
         self.network_button.grid(row=1, column=0, sticky="ew", pady=5)
-
 
         # Mostrar los botones de acceso para la página de inicio (Home)
         self.create_home_buttons()
