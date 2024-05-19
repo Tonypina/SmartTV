@@ -1,6 +1,6 @@
 import tkinter as tk
 
-class FormularioGraficasDesign():
+class HomeScreen():
 
     def __init__(self, panel_principal):           
         
