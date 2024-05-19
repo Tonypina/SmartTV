@@ -4,7 +4,7 @@ from config import  COLOR_CUERPO_PRINCIPAL
 
 class NetworkScreen():
 
-    def __init__(self, panel_principal, logo):
+    def __init__(self, panel_principal, app_logic):
 
         # Crear paneles: barra superior
         self.barra_superior = tk.Frame( panel_principal)

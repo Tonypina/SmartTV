@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import font
 from config import COLOR_BARRA_SUPERIOR, COLOR_MENU_LATERAL, COLOR_CUERPO_PRINCIPAL, COLOR_MENU_CURSOR_ENCIMA
 import util.util_imagenes as util_img
+from util.smart_tv_app_logic import SmartTVAppLogic
 
 # Nuevo
 from gui.home_screen import HomeScreen
@@ -21,6 +22,8 @@ class SmartTVAppGUI(tk.Tk):
         self.controles_menu_lateral()
         self.controles_cuerpo()
         self.bind('<Escape>', self.exit_app)
+
+        self.app_logic = SmartTVAppLogic(self.winfo_screenwidth(), self.winfo_screenheight())
     
     def config_window(self):
         # Configuración inicial de la ventana
@@ -118,11 +121,11 @@ class SmartTVAppGUI(tk.Tk):
     # Nuevo
     def abrir_home_screen(self):   
         self.limpiar_panel(self.cuerpo_principal)     
-        HomeScreen(self.cuerpo_principal)   
+        HomeScreen(self.cuerpo_principal, self.app_logic)   
         
     def abrir_network_screen(self):   
-        self.limpiar_panel(self.cuerpo_principal)     
-        NetworkScreen(self.cuerpo_principal,self.img_sitio_construccion) 
+        self.limpiar_panel(self.cuerpo_principal, self.app_logic)     
+        NetworkScreen(self.cuerpo_principal) 
 
     def limpiar_panel(self,panel):
     # Función para limpiar el contenido del panel
