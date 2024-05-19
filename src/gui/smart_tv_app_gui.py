@@ -81,8 +81,8 @@ class SmartTVAppGUI(tk.Tk):
 
         buttons_info = [
             ("Home", "\uf109", self.buttonHome, self.abrir_home_screen ),
-            ("Reproducir disco extraible", "\uf013", self.buttonUSB, self.abrir_usb_screen)
-            ("Configuración de Red", "\uf013", self.buttonNetwork, self.abrir_network_screen)
+            ("Reproducir disco extraible", "\uf013", self.buttonUSB, self.abrir_usb_screen),
+            ("Configuración de Red", "\uf013", self.buttonNetwork, self.abrir_network_screen),
         ]
 
         for text, icon, button,comando in buttons_info:
