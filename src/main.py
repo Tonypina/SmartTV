@@ -4,6 +4,6 @@ from smart_tv_app_logic import SmartTVAppLogic
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app_logic = SmartTVAppLogic()
+    app_logic = SmartTVAppLogic(root.winfo_screenwidth(), root.winfo_screenheight())
     app = SmartTVAppGUI(root, app_logic)
     root.mainloop()

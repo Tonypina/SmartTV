@@ -6,7 +6,7 @@ from tkinter import filedialog
 from PIL import Image, ImageTk
 
 class SmartTVAppLogic:
-    def __init__(self):
+    def __init__(self, screen_width, screen_height):
         self.media_player = None
         self.media_thread = None
 
