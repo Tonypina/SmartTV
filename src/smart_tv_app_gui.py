@@ -18,11 +18,6 @@ class SmartTVAppGUI:
         screen_height = self.root.winfo_screenheight()
         self.root.geometry("%dx%d" % (screen_width, screen_height))
 
-        # Crear botones de acceso (Home)
-        self.buttons = []
-        # self.create_home_buttons()
-
-        # self.show_home()
 
         # Inicializar variables para el fondo
         self.bg_paths = ["background1.jpg", "background2.jpg", "background3.jpg"]
@@ -32,6 +27,12 @@ class SmartTVAppGUI:
         self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
         self.root.bind("<Configure>", self.resize_background)
         self.update_background()
+
+        # Crear botones de acceso (Home)
+        self.buttons = []
+        # self.create_home_buttons()
+
+        self.show_network()
 
         # Configurar la geometría de la ventana
         root.grid_rowconfigure(0, weight=1)
