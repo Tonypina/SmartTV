@@ -18,15 +18,11 @@ class SmartTVAppGUI:
         screen_height = self.root.winfo_screenheight()
         self.root.geometry("%dx%d" % (screen_width, screen_height))
 
-        # Crear el sidebar
-        self.sidebar = ttk.Frame(root, width=200, relief="raised", padding=(10, 10))
-        self.sidebar.grid(row=0, column=0, sticky="nsew")
+        # Crear botones de acceso (Home)
+        self.buttons = []
+        self.create_home_buttons()
 
-        # Crear los botones del sidebar
-        self.home_button = ttk.Button(self.sidebar, text="Home", command=self.show_home)
-        self.home_button.grid(row=0, column=0, sticky="ew", pady=5)
-        self.network_button = ttk.Button(self.sidebar, text="Red", command=self.show_network)
-        self.network_button.grid(row=1, column=0, sticky="ew", pady=5)
+        self.show_home()
 
         # Inicializar variables para el fondo
         self.bg_paths = ["background1.jpg", "background2.jpg", "background3.jpg"]
@@ -36,12 +32,6 @@ class SmartTVAppGUI:
         self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
         self.root.bind("<Configure>", self.resize_background)
         self.update_background()
-
-        # Crear botones de acceso (Home)
-        self.buttons = []
-        self.create_home_buttons()
-
-        self.show_home()
 
         # Configurar la geometría de la ventana
         root.grid_rowconfigure(0, weight=1)
@@ -53,7 +43,7 @@ class SmartTVAppGUI:
         style.configure("WhiteButton.TButton", background="white", foreground="black", bordercolor="white")
 
         # Añadir título en la parte superior izquierda
-        title_label = tk.Label(root, text="Smart TV", font=("Helvetica", 30), fg="black", bg=root.cget("bg"))
+        title_label = tk.Label(root, text="MaFE TV", font=("Helvetica", 30), fg="black", bg=root.cget("bg"))
         title_label.grid(row=0, column=1, padx=10, pady=10, sticky="w")
 
         # Añadir la hora en la parte superior derecha
