@@ -39,7 +39,7 @@ class SmartTVAppGUI:
 
         # Crear botones de acceso (Home)
         self.buttons = []
-        self.create_home_buttons()
+        # self.create_home_buttons()
 
         # Configurar la geometría de la ventana
         root.grid_rowconfigure(0, weight=1)
