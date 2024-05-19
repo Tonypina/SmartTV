@@ -13,9 +13,10 @@ class HomeScreen():
         button_font = font.Font(family='FontAwesome', size=15)
 
         self.buttonNetflix = tk.Button( panel_principal )
+        self.nextflixImg = util_img.leer_imagen("./../src/img/Netflix.png", (500, 500))
 
         buttons_info = [
-            ("Netflix", util_img.leer_imagen("./../src/img/Netflix.png", (500, 500)), self.buttonNetflix, app_logic.open_netflix_kiosk)
+            ("Netflix", self.nextflixImg, self.buttonNetflix, app_logic.open_netflix_kiosk)
         ]
 
         for text, img, button, command in buttons_info:
