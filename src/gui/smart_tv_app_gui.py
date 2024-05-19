@@ -86,7 +86,7 @@ class SmartTVAppGUI(tk.Tk):
             self.configurar_boton_menu(button, text, icon, font_awesome, ancho_menu, alto_menu,comando)                    
     
     def controles_cuerpo(self):
-        HomeScreen(self.cuerpo_principal)   
+        # HomeScreen(self.cuerpo_principal)   
         pass     
   
     def configurar_boton_menu(self, button, text, icon, font_awesome, ancho_menu, alto_menu, comando):
