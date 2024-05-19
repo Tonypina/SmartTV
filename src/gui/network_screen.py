@@ -26,13 +26,13 @@ class NetworkScreen():
         self.labelTitulo.config(fg="#222d33", font=("Roboto", 30), bg=COLOR_CUERPO_PRINCIPAL)
         self.labelTitulo.pack(side=tk.TOP, fill='both', expand=True)
 
-        for network in self.wifi_ssids:
-            self.ssids_config(network)
-    
         self.selectedSSIDLabel = tk.Label(self.barra_der, text="")
         self.labelTitulo.config(fg="#fff", font=(
             "Roboto", 10), bg=COLOR_CUERPO_PRINCIPAL, padx=10, width=20)
-        self.selectedSSIDLabel.pack()
+        self.selectedSSIDLabel.pack(side=tk.TOP, expand=True)
+
+        for network in self.wifi_ssids:
+            self.ssids_config(network)
 
     def ssids_config(self, ssid):
         ssidLabel = tk.Button(self.barra_izq, text=ssid, anchor="w", bd=0, fg="white", command=self.select_ssid(ssid))
