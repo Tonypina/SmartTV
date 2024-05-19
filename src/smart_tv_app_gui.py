@@ -94,9 +94,6 @@ class SmartTVAppGUI:
         for widget in self.root.winfo_children():
             widget.destroy()
 
-        # Mostrar los botones de acceso para la página de inicio (Home)
-        self.create_home_buttons()
-
         # Crear el sidebar
         self.sidebar = ttk.Frame(self.root, relief="raised", padding=(10, 10))
         self.sidebar.grid(row=0, column=0, sticky="nsew")
@@ -107,6 +104,9 @@ class SmartTVAppGUI:
         self.home_button.grid(row=0, column=0, sticky="ew", pady=(self.screen_height // 2 - 100, 5))  # Centrar verticalmente
         self.network_button = ttk.Button(self.sidebar, text="Red", command=self.show_network)
         self.network_button.grid(row=1, column=0, sticky="ew", pady=5)  # Ajustar el espaciado
+
+        # Mostrar los botones de acceso para la página de inicio (Home)
+        self.create_home_buttons()
 
         self.update_background()  # Actualizar el fondo
 
