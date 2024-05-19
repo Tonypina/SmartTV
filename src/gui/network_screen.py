@@ -41,8 +41,20 @@ class NetworkScreen():
             "Roboto", 20), text=ssid, anchor="w", bd=0, fg="#222d33", command=self.select_ssid(ssid), 
             bg=COLOR_CUERPO_PRINCIPAL, pady=10)
         ssidLabel.pack()
+        ssidLabel.bind("<Enter>", lambda event: self.on_enter(event, ssidLabel))
+        ssidLabel.bind("<Leave>", lambda event: self.on_leave(event, ssidLabel))
+        ssidLabel.bind("<FocusIn>", lambda event: self.on_enter(event, ssidLabel))
+        ssidLabel.bind("<FocusOut>", lambda event: self.on_leave(event, ssidLabel))
 
     def select_ssid(self, ssid):
         self.selectedSSIDLabel.config(text=ssid)
         # self.selectedSSIDLabel.pack(side=tk.TOP, expand=True)
         pass
+
+    def on_enter(self, event, button):
+        # Cambiar estilo al pasar el ratón por encima
+        button.config(width=self.button_width + 20, height=self.button_height + 20, fg='white')
+
+    def on_leave(self, event, button):
+        # Restaurar estilo al salir el ratón
+        button.config(w
