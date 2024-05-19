@@ -39,12 +39,12 @@ class SmartTVAppGUI:
 
         # Crear botones de acceso (Home)
         self.buttons = []
-        # self.create_home_buttons()
+        self.create_home_buttons()
 
         # Configurar la geometría de la ventana
         root.grid_rowconfigure(0, weight=1)
         root.grid_rowconfigure(4, weight=1)
-        root.grid_columnconfigure(list(range(len(self.buttons))), weight=1)
+        root.grid_columnconfigure(list(range(len(self.buttons)+2)), weight=1)
 
         # Establecer estilos para los botones
         style = ttk.Style()
@@ -67,24 +67,6 @@ class SmartTVAppGUI:
 
         # Configurar estilos para los botones seleccionados
         style.configure("SelectedButton.TButton", background="yellow", foreground="black", bordercolor="white")
-
-    def create_home_buttons(self):
-        # Crear botones de acceso (Home)
-        buttons_info = [
-            {"name": "Netflix", "icon": "netflix.png", "command": self.app_logic.open_netflix_kiosk},
-            {"name": "YouTube", "icon": "youtube.png", "command": self.app_logic.open_youtube_kiosk},
-            {"name": "Google", "icon": "google.png", "command": self.app_logic.open_google_kiosk},
-            {"name": "Reproducir", "icon": "usb.png", "command": self.app_logic.play_usb_content},
-            {"name": "Reproducir con VLC", "icon": "vlc.png", "command": self.app_logic.play_vlc_content}
-        ]
-
-        for i, button_info in enumerate(buttons_info):
-            button = ttk.Button(self.root, text=button_info["name"], compound=tk.TOP, style="WhiteButton.TButton",
-                                command=button_info["command"])
-            button.image = self.load_image(button_info["icon"], 100, 100)
-            button.config(image=button.image)
-            button.grid(row=2, column=i, padx=10, pady=10)
-            self.buttons.append(button)
 
     def create_home_buttons(self):
         # Crear botones de acceso (Home)
@@ -132,11 +114,11 @@ class SmartTVAppGUI:
 
         # Añadir título en la parte superior izquierda
         title_label = tk.Label(self.root, text="Smart TV", font=("Helvetica", 30), fg="black", bg=self.root.cget("bg"))
-        title_label.grid(row=0, column=0, padx=10, pady=10, sticky="w")
+        title_label.grid(row=0, column=1, padx=10, pady=10, sticky="w")
 
         # Añadir la hora en la parte superior derecha
         self.time_label = tk.Label(self.root, text="", font=("Helvetica", 24), fg="black", bg=self.root.cget("bg"))
-        self.time_label.grid(row=0, column=len(self.buttons)-1, padx=10, pady=10, sticky="e")
+        self.time_label.grid(row=0, column=len(self.buttons), padx=10, pady=10, sticky="e")
         self.update_time()
 
         # Estado para rastrear la posición actual del cursor
