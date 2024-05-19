@@ -91,15 +91,8 @@ class SmartTVAppGUI:
         # Limpiar el área de contenido
         for widget in self.root.winfo_children():
             widget.destroy()
-
-        # Inicializar variables para el fondo
-        # self.bg_paths = ["background1.jpg", "background2.jpg", "background3.jpg"]
-        # self.bg_images = [self.load_image(path, self.screen_width, self.screen_height) for path in self.bg_paths]
-        # self.current_bg_index = 0
-        # self.bg_label = tk.Label(root)
-        # self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
-        # self.root.bind("<Configure>", self.resize_background)
-        # self.update_background()
+            
+        self.update_background()
 
         # Crear el sidebar
         self.sidebar = ttk.Frame(self.root, width=200, relief="raised", padding=(10, 10))
