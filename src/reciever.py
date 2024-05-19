@@ -5,11 +5,13 @@ def leer_entrada_ir():
     resultado = subprocess.run(["ir-keytable", "-t", "-s", "rc0"], capture_output=True, text=True)
     salida = resultado.stdout
 
+    print(salida)
+
     # Procesa la salida para obtener el código recibido
     codigo = None
     lineas = salida.split("\n")
     for linea in lineas:
-        if "nec" in linea:  # Busca la línea que contiene el código NEC
+        if "necx" in linea:  # Busca la línea que contiene el código NEC
             partes = linea.split(" ")
             codigo = partes[-1]  # El último elemento de la línea es el código NEC
             break
