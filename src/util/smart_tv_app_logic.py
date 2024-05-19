@@ -31,6 +31,10 @@ class SmartTVAppLogic:
     def open_hbo_kiosk(self):
         url_servicios_video = "https://www.max.com/mx/es"
         os.system(f"chromium-browser --start-fullscreen --hide-scrollbars --enable-chrome-browser-cloud-management --window-size={self.screen_width},{self.screen_height} --window-position=0,0 --app={url_servicios_video}")
+    
+    def open_f1_kiosk(self):
+        url_servicios_video = "https://f1tv.formula1.com/"
+        os.system(f"chromium-browser --start-fullscreen --hide-scrollbars --enable-chrome-browser-cloud-management --window-size={self.screen_width},{self.screen_height} --window-position=0,0 --app={url_servicios_video}")
 
     def play_usb_content(self):
         usb_path = filedialog.askdirectory(title="Seleccionar USB")
