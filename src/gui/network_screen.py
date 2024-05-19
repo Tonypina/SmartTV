@@ -14,7 +14,7 @@ class NetworkScreen():
         
         # Crear paneles: barra izquierda
         self.barra_izq = tk.Frame(panel_principal)
-        self.barra_izq.pack(side=tk.LEFT, fill=both, expand=True) 
+        self.barra_izq.pack(side=tk.LEFT, fill="both", expand=True) 
 
         # Crear paneles: barra der
         self.barra_der = tk.Frame(panel_principal)
