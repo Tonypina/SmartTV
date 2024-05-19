@@ -196,8 +196,8 @@ class SmartTVAppGUI:
         self.home_button.grid(row=0, column=0, sticky="ew", pady=5)
         self.network_button = ttk.Button(self.sidebar, text="Red", command=self.show_network)
         self.network_button.grid(row=1, column=0, sticky="ew", pady=5)
-        
-            # Mostrar la lista de redes disponibles
+
+        # Mostrar la lista de redes disponibles
         self.app_logic.display_available_networks()
 
         # Crear un entry para que el usuario escriba la contraseña
