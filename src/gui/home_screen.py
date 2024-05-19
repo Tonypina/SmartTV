@@ -16,10 +16,16 @@ class HomeScreen():
         self.nextflixImg = util_img.leer_imagen("./../src/img/Netflix.png", (200, 200))
         self.buttonGoogle = tk.Button( panel_principal )
         self.googleImg = util_img.leer_imagen("./../src/img/Google.png", (200, 200))
+        self.buttonYoutube = tk.Button( panel_principal )
+        self.youtubeImg = util_img.leer_imagen("./../src/img/Youtube.png", (200, 200))
+        self.buttonSpotify = tk.Button( panel_principal )
+        self.spotifyImg = util_img.leer_imagen("./../src/img/Spotify.png", (200, 200))
 
         buttons_info = [
             ("Netflix", self.nextflixImg, self.buttonNetflix, app_logic.open_netflix_kiosk),
             ("Google", self.googleImg, self.buttonGoogle, app_logic.open_google_kiosk),
+            ("Youtube", self.youtubeImg, self.buttonYoutube, app_logic.open_youtube_kiosk),
+            ("Spotify", self.spotifyImg, self.buttonSpotify, app_logic.open_spotify_kiosk),
         ]
 
         for text, img, button, command in buttons_info:
