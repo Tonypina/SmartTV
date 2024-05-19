@@ -8,8 +8,8 @@ class HomeScreen():
 
     def __init__(self, panel_principal, app_logic):
         
-        button_width = 20
-        button_height = 2
+        button_width = 50
+        button_height = 10
         button_font = font.Font(family='FontAwesome', size=15)
 
         self.buttonNetflix = tk.Button( panel_principal )
@@ -22,7 +22,7 @@ class HomeScreen():
             self.buttons_config(text, img, button, button_font, button_width, button_height, command)
 
     def buttons_config(self, text, img, button, button_font, button_width, button_height, command):
-        button.config(text=f"{img} {text}", image=img, anchor="center", font=button_font,
+        button.config(text=f"{text}", image=img, anchor="center", font=button_font,
                       bd=0, bg=COLOR_MENU_LATERAL, fg="white", width=button_width, height=button_height,
                       command = command)
         button.pack(side=tk.LEFT, expand=True)
