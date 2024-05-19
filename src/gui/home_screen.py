@@ -8,8 +8,8 @@ class HomeScreen():
 
     def __init__(self, panel_principal, app_logic):
         
-        self.button_width = 300
-        self.button_height = 300
+        self.button_width = 250
+        self.button_height = 250
         self.button_font = font.Font(family='FontAwesome', size=15)
 
         # Crear paneles: barra superior
@@ -18,22 +18,22 @@ class HomeScreen():
 
         # Crear paneles: barra inferior
         self.barra_inferior = tk.Frame( panel_principal)
-        self.barra_inferior.pack(side=tk.BOTTOM, fill='both', expand=True)  
+        self.barra_inferior.pack(side=tk.BOTTOM, fill='both', expand=True, bg=COLOR_CUERPO_PRINCIPAL)  
 
         # Primer Label con texto
         self.labelTitulo = tk.Label(
             self.barra_superior, text="MaFE TV")
-        self.labelTitulo.config(fg="#222d33", font=("Roboto", 30), bg=COLOR_CUERPO_PRINCIPAL)
+        self.labelTitulo.config(fg="#222d33", font=("Roboto", 30), bg=COLOR_CUERPO_PRINCIPAL, pady=50)
         self.labelTitulo.pack(side=tk.TOP, fill='both', expand=True)
 
         self.buttonNetflix = tk.Button( self.barra_inferior )
-        self.nextflixImg = util_img.leer_imagen("./../src/img/Netflix.png", (300, 300))
+        self.nextflixImg = util_img.leer_imagen("./../src/img/Netflix.png", (self.button_width, self.button_height))
         self.buttonGoogle = tk.Button( self.barra_inferior )
-        self.googleImg = util_img.leer_imagen("./../src/img/Google.png", (300, 300))
+        self.googleImg = util_img.leer_imagen("./../src/img/Google.png", (self.button_width, self.button_height))
         self.buttonYoutube = tk.Button( self.barra_inferior )
-        self.youtubeImg = util_img.leer_imagen("./../src/img/Youtube.png", (300, 300))
+        self.youtubeImg = util_img.leer_imagen("./../src/img/Youtube.png", (self.button_width, self.button_height))
         self.buttonSpotify = tk.Button( self.barra_inferior )
-        self.spotifyImg = util_img.leer_imagen("./../src/img/Spotify.png", (300, 300))
+        self.spotifyImg = util_img.leer_imagen("./../src/img/Spotify.png", (self.button_width, self.button_height))
 
         buttons_info = [
             ("Netflix", self.nextflixImg, self.buttonNetflix, app_logic.open_netflix_kiosk),
