@@ -134,3 +134,11 @@ class SmartTVAppLogic:
                 self.stop_media_player()
                 break
             time.sleep(1)
+
+    def display_available_networks(self):
+        # Simulación de búsqueda de redes disponibles
+        return ["Red1", "Red2", "Red3"]
+
+    def connect_to_network(self, network, password):
+        # Simulación de conexión a una red
+        print(f"Conectando a la red '{network}' con la contraseña '{password}'")
