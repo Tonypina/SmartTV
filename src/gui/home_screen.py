@@ -71,6 +71,8 @@ class HomeScreen():
         # Asociar eventos Enter y Leave con la función dinámica
         button.bind("<Enter>", lambda event: self.on_enter(event, button))
         button.bind("<Leave>", lambda event: self.on_leave(event, button))
+        button.bind("<FocusIn>", lambda event: self.on_enter(event, button))
+        button.bind("<FocusOut>", lambda event: self.on_leave(event, button))
 
     def on_enter(self, event, button):
         # Cambiar estilo al pasar el ratón por encima

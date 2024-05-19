@@ -25,7 +25,7 @@ class NetworkScreen():
         # Primer Label con texto
         self.labelTitulo = tk.Label(
             self.barra_sup, text="Configuración de Red")
-        self.labelTitulo.config(fg="#222d33", font=("Roboto", 30), bg=COLOR_CUERPO_PRINCIPAL)
+        self.labelTitulo.config(fg="#222d33", font=("Roboto", 30), bg=COLOR_CUERPO_PRINCIPAL, pady=50)
         self.labelTitulo.pack(side=tk.TOP, fill='both', expand=True)
 
         self.selectedSSIDLabel = tk.Label(self.barra_der, text="")
@@ -37,7 +37,7 @@ class NetworkScreen():
             self.ssids_config(network)
 
     def ssids_config(self, ssid):
-        ssidLabel = tk.Button(self.barra_izq, text=ssid, anchor="w", bd=0, fg="#222d33", command=self.select_ssid(ssid), bg=COLOR_CUERPO_PRINCIPAL)
+        ssidLabel = tk.Button(self.barra_izq, text=ssid, anchor="w", bd=0, fg="#222d33", command=self.select_ssid(ssid), bg=COLOR_CUERPO_PRINCIPAL, pady=10)
         ssidLabel.pack()
 
     def select_ssid(self, ssid):
