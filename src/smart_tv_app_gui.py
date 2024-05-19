@@ -96,7 +96,7 @@ class SmartTVAppGUI:
         self.create_home_buttons()
 
         # Crear el sidebar
-        self.sidebar = ttk.Frame(self.root, relief="raised", padding=(10, 10))
+        self.sidebar = ttk.Frame(self.root, relief="raised")
         self.sidebar.grid(row=0, column=0, sticky="nsew")
         self.root.update_idletasks()  # Asegurar que el sidebar tenga la altura completa del monitor
 
