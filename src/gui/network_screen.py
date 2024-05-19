@@ -28,7 +28,7 @@ class NetworkScreen():
         self.labelTitulo.config(fg="#222d33", font=("Roboto", 30), bg=COLOR_CUERPO_PRINCIPAL, pady=50)
         self.labelTitulo.pack(side=tk.TOP, fill='both', expand=True)
 
-        self.selectedSSIDLabel = tk.Label(self.barra_der, text="")
+        self.selectedSSIDLabel = tk.Label(self.barra_der, text="SSID: ")
         self.selectedSSIDLabel.config(fg="#222d33", font=(
             "Roboto", 20), padx=10, width=20, bg=COLOR_CUERPO_PRINCIPAL)
         self.selectedSSIDLabel.pack(side=tk.TOP)
@@ -47,7 +47,7 @@ class NetworkScreen():
         ssidLabel.bind("<FocusOut>", lambda event: self.on_leave(event, ssidLabel))
 
     def select_ssid(self, ssid):
-        self.selectedSSIDLabel.config(text=ssid)
+        self.selectedSSIDLabel.config(text="SSID: {ssid}")
         # self.selectedSSIDLabel.pack(side=tk.TOP, expand=True)
         pass
 
