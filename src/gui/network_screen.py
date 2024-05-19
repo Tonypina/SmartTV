@@ -29,9 +29,9 @@ class NetworkScreen():
         for network in self.wifi_ssids:
             self.ssids_config(network)
     
-    def ssids_config(ssid):
+    def ssids_config(self, ssid):
         ssidLabel = tk.Button(self.barra_izq, text=ssid, anchor="w", bd=0, fg="white", command=self.select_ssid)
         ssidLabel.pack()
 
-    def select_ssid():
+    def select_ssid(self):
         pass
