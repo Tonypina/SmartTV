@@ -30,6 +30,8 @@ class NetworkScreen():
             self.ssids_config(network)
     
         self.selectedSSIDLabel = tk.Label(self.barra_der, text="")
+        self.labelTitulo.config(fg="#fff", font=(
+            "Roboto", 10), bg=COLOR_CUERPO_PRINCIPAL, padx=10, width=20)
         self.selectedSSIDLabel.pack()
 
     def ssids_config(self, ssid):
