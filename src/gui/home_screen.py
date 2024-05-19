@@ -27,7 +27,7 @@ class HomeScreen():
 
     def buttons_config(self, text, img, button, button_font, button_width, button_height, command):
         button.config(text=f"{text}", image=img, anchor="center", font=button_font,
-                      bd=0, bg=COLOR_MENU_LATERAL, fg="white", width=button_width, height=button_height,
+                      bd=0, bg=COLOR_CUERPO_PRINCIPAL, fg="white", width=button_width, height=button_height,
                       highlightthickness = 0,
                       command = command)
         button.pack(side=tk.LEFT, expand=True)
