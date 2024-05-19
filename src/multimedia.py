@@ -17,7 +17,7 @@ class SmartTVApp:
         # Obtener la resolución del monitor
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
-        self.root.geometry("%d%d" % (self.screen_width, self.screen_height))
+        self.root.geometry("%d%d" % (self.root.winfo_screenwidth(), self.root.winfo_screenheight()))
 
         # Inicializar variables para el fondo
         self.bg_paths = ["background1.jpg", "background2.jpg", "background3.jpg"]
