@@ -10,15 +10,15 @@ class NetworkScreen():
 
         # Crear paneles: barra sup
         self.barra_sup = tk.Frame(panel_principal)
-        self.barra_sup.pack(side=tk.TOP, fill=tk.X, expand=False) 
+        self.barra_sup.pack(side=tk.TOP, fill=tk.X, expand=False, bg=COLOR_CUERPO_PRINCIPAL) 
         
         # Crear paneles: barra izquierda
         self.barra_izq = tk.Frame(panel_principal)
-        self.barra_izq.pack(side=tk.LEFT, fill="both", expand=True) 
+        self.barra_izq.pack(side=tk.LEFT, fill="both", expand=True, bg=COLOR_CUERPO_PRINCIPAL) 
 
         # Crear paneles: barra der
         self.barra_der = tk.Frame(panel_principal)
-        self.barra_der.pack(side=tk.RIGHT, fill="both", expand=True)  
+        self.barra_der.pack(side=tk.RIGHT, fill="both", expand=True, bg=COLOR_CUERPO_PRINCIPAL)  
 
         # Primer Label con texto
         self.labelTitulo = tk.Label(
@@ -28,7 +28,7 @@ class NetworkScreen():
 
         self.selectedSSIDLabel = tk.Label(self.barra_der, text="")
         self.selectedSSIDLabel.config(fg="#fff", font=(
-            "Roboto", 10), bg=COLOR_CUERPO_PRINCIPAL, padx=10, width=20)
+            "Roboto", 10), padx=10, width=20)
         self.selectedSSIDLabel.pack(side=tk.TOP, expand=True)
 
         for network in self.wifi_ssids:
