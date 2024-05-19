@@ -151,7 +151,7 @@ class SmartTVAppLogic:
     def display_available_networks(self):
         import subprocess
 
-    def get_wifi_ssids():
+    def get_wifi_ssids(self):
         # Ejecuta el comando para listar las redes Wi-Fi disponibles
         resultado = subprocess.run(['nmcli', '-t', '-f', 'SSID', 'dev', 'wifi'], capture_output=True, text=True)
         
