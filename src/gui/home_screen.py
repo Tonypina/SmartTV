@@ -8,18 +8,32 @@ class HomeScreen():
 
     def __init__(self, panel_principal, app_logic):
         
-        self.button_width = 200
-        self.button_height = 200
+        self.button_width = 300
+        self.button_height = 300
         self.button_font = font.Font(family='FontAwesome', size=15)
 
-        self.buttonNetflix = tk.Button( panel_principal )
-        self.nextflixImg = util_img.leer_imagen("./../src/img/Netflix.png", (200, 200))
-        self.buttonGoogle = tk.Button( panel_principal )
-        self.googleImg = util_img.leer_imagen("./../src/img/Google.png", (200, 200))
-        self.buttonYoutube = tk.Button( panel_principal )
-        self.youtubeImg = util_img.leer_imagen("./../src/img/Youtube.png", (200, 200))
-        self.buttonSpotify = tk.Button( panel_principal )
-        self.spotifyImg = util_img.leer_imagen("./../src/img/Spotify.png", (200, 200))
+        # Crear paneles: barra superior
+        self.barra_superior = tk.Frame( panel_principal)
+        self.barra_superior.pack(side=tk.TOP, fill=tk.X, expand=False) 
+
+        # Crear paneles: barra inferior
+        self.barra_inferior = tk.Frame( panel_principal)
+        self.barra_inferior.pack(side=tk.BOTTOM, fill='both', expand=True)  
+
+        # Primer Label con texto
+        self.labelTitulo = tk.Label(
+            self.barra_superior, text="MaFE TV")
+        self.labelTitulo.config(fg="#222d33", font=("Roboto", 30), bg=COLOR_CUERPO_PRINCIPAL)
+        self.labelTitulo.pack(side=tk.TOP, fill='both', expand=True)
+
+        self.buttonNetflix = tk.Button( self.barra_inferior )
+        self.nextflixImg = util_img.leer_imagen("./../src/img/Netflix.png", (300, 300))
+        self.buttonGoogle = tk.Button( self.barra_inferior )
+        self.googleImg = util_img.leer_imagen("./../src/img/Google.png", (300, 300))
+        self.buttonYoutube = tk.Button( self.barra_inferior )
+        self.youtubeImg = util_img.leer_imagen("./../src/img/Youtube.png", (300, 300))
+        self.buttonSpotify = tk.Button( self.barra_inferior )
+        self.spotifyImg = util_img.leer_imagen("./../src/img/Spotify.png", (300, 300))
 
         buttons_info = [
             ("Netflix", self.nextflixImg, self.buttonNetflix, app_logic.open_netflix_kiosk),
