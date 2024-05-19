@@ -28,6 +28,8 @@ class SmartTVAppGUI:
         self.root.bind("<Configure>", self.resize_background)
         self.update_background()
 
+        self.buttons = []
+        self.create_home_buttons()
 
         # Configurar la geometría de la ventana
         root.grid_rowconfigure(0, weight=1)
@@ -35,8 +37,6 @@ class SmartTVAppGUI:
         root.grid_columnconfigure(list(range(len(self.buttons)+2)), weight=1)
 
         # Crear botones de acceso (Home)
-        self.buttons = []
-        self.create_home_buttons()
         
         # Crear el sidebar
         self.sidebar = ttk.Frame(self.root, height=self.screen_height, relief="raised", padding=(10, 10))
