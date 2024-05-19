@@ -93,16 +93,6 @@ class SmartTVAppGUI:
             widget.destroy()
 
         
-        # Crear el sidebar
-        self.sidebar = ttk.Frame(self.root, width=200, relief="raised", padding=(10, 10))
-        self.sidebar.grid(row=0, column=0, sticky="nsew")
-
-        # Crear los botones del sidebar
-        self.home_button = ttk.Button(self.sidebar, text="Home", command=self.show_home)
-        self.home_button.grid(row=0, column=0, sticky="ew", pady=5)
-        self.network_button = ttk.Button(self.sidebar, text="Red", command=self.show_network)
-        self.network_button.grid(row=1, column=0, sticky="ew", pady=5)
-
         # Inicializar variables para el fondo
         self.bg_paths = ["background1.jpg", "background2.jpg", "background3.jpg"]
         self.bg_images = [self.load_image(path, screen_width, screen_height) for path in self.bg_paths]
@@ -114,6 +104,17 @@ class SmartTVAppGUI:
 
         # Mostrar los botones de acceso para la página de inicio (Home)
         self.create_home_buttons()
+
+        # Crear el sidebar
+        self.sidebar = ttk.Frame(self.root, width=200, relief="raised", padding=(10, 10))
+        self.sidebar.grid(row=0, column=0, sticky="nsew")
+
+        # Crear los botones del sidebar
+        self.home_button = ttk.Button(self.sidebar, text="Home", command=self.show_home)
+        self.home_button.grid(row=0, column=0, sticky="ew", pady=5)
+        self.network_button = ttk.Button(self.sidebar, text="Red", command=self.show_network)
+        self.network_button.grid(row=1, column=0, sticky="ew", pady=5)
+
 
         # Actualizar la geometría de la ventana
         self.root.update_idletasks()
