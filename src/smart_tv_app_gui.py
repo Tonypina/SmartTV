@@ -94,6 +94,9 @@ class SmartTVAppGUI:
         for widget in self.root.winfo_children():
             widget.destroy()
 
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=3)
+
         # Crear el sidebar
         self.sidebar = ttk.Frame(self.root, relief="raised", padding=(10, 10))
         self.sidebar.grid(row=0, column=0, sticky="nsew")
