@@ -14,6 +14,8 @@ class SmartTVAppGUI(tk.Tk):
         # self.logo = util_img.leer_imagen("./src/img/logo.png", (560, 136))
         # self.perfil = util_img.leer_imagen("./src/img/Perfil.png", (100, 100))
         # self.img_sitio_construccion = util_img.leer_imagen("./src/img/sitio_construccion.png", (200, 200))
+        # self.bind('<KeyPress>', self.handle_keypress)
+        self.bind('<Escape>', self.exit_app)
         self.config_window()
         self.paneles()
         self.controles_barra_superior()        
@@ -126,3 +128,6 @@ class SmartTVAppGUI(tk.Tk):
     # Función para limpiar el contenido del panel
         for widget in panel.winfo_children():
             widget.destroy()
+
+    def exit_app(self, event=None):
+        self.destroy()
