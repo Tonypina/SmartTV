@@ -22,7 +22,7 @@ class SmartTVAppGUI(tk.Tk):
     
     def config_window(self):
         # Configuración inicial de la ventana
-        self.title('Python GUI')
+        # self.title('Python GUI')
         # self.iconbitmap("./img/logo.ico")
 
         pantall_ancho = self.winfo_screenwidth()
