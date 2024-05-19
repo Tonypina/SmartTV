@@ -11,9 +11,9 @@ class SmartTVAppGUI(tk.Tk):
 
     def __init__(self):
         super().__init__()
-        self.logo = util_img.leer_imagen("./img/logo.png", (560, 136))
-        self.perfil = util_img.leer_imagen("./img/Perfil.png", (100, 100))
-        self.img_sitio_construccion = util_img.leer_imagen("./img/sitio_construccion.png", (200, 200))
+        self.logo = util_img.leer_imagen("./../img/logo.png", (560, 136))
+        self.perfil = util_img.leer_imagen("./../img/Perfil.png", (100, 100))
+        self.img_sitio_construccion = util_img.leer_imagen("./../img/sitio_construccion.png", (200, 200))
         self.config_window()
         self.paneles()
         self.controles_barra_superior()        
