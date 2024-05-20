@@ -34,6 +34,7 @@ class VideoScreen:
             self.create_video_button(video)
 
         self.sendAllbutton = tk.Button(self.barra_inf, text="Reproducir todos", font=("Roboto", 20), command=lambda: self.abrir_video_frame(self.video_files))
+        self.sendAllbutton.pack(fill=tk.X, paddy=5)
 
     def create_video_button(self, video):
         button = tk.Button(self.barra_inf, text=video, font=("Roboto", 20), command=lambda: self.abrir_video_frame([video]))
