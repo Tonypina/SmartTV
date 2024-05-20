@@ -185,17 +185,14 @@ class SmartTVAppLogic:
         #     print("Failed to mount the USB device")
 
     def mount_usb(self, device_node):
+        usb_path = "/home/pi/usb"
         try:
-            result = subprocess.run(['sudo', 'mount', '/dev/sda1', '/home/pi/usb'],
+            result = subprocess.run(['sudo', 'mount', '/dev/sda1', usb_path],
                                     stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            print(result)
+            
             if result.returncode == 0:
-                output = result.stdout.decode('utf-8').strip()
-                mount_path = output.split()[-1]
 
-                print(mount_path)
-
-                return mount_path
+                self.analyze_usb_content(usb_path)
             else:
                 print(f"Error mounting USB: {result.stderr.decode('utf-8')}")
                 return None
@@ -221,11 +218,15 @@ class SmartTVAppLogic:
                 elif file.endswith(music_ext):
                     music_files.append(os.path.join(root, file))
 
-        if video_files and not image_files and not music_files:
-            self.show_video_options(video_files)
-        elif image_files and not video_files and not music_files:
-            self.show_image_slideshow(image_files)
-        elif music_files and not video_files and not image_files:
-            self.play_music_playlist(music_files)
+        if len(video_files) and not len(image_files) and not len(music_files):
+            # self.show_video_options(video_files)
+            print("Tiene puros videos")
+        elif len(image_files) and not len(video_files) and not len(music_files):
+            # self.show_image_slideshow(image_files)
+            print("Tiene puras imagenes")
+        elif len(music_files) and not len(video_files) and not len(image_files):
+            # self.play_music_playlist(music_files)
+            print("Tiene puras canciones")
         else:
-            self.ask_user_action(video_files, image_files, music_files)
+            # self.ask_user_action(video_files, image_files, music_files)
+            print("Es mixto")
