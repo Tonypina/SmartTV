@@ -11,6 +11,7 @@ from gui.home_screen import HomeScreen
 from gui.network_screen import NetworkScreen
 from gui.video_options_screen import VideoOptions
 from gui.images_screen import ImagesScreen
+from gui.music_screen import MusicScreen
 from gui.usb_screen import USBScreen
 
 class SmartTVAppGUI(tk.Tk):
@@ -179,6 +180,6 @@ class SmartTVAppGUI(tk.Tk):
         self.limpiar_panel(self.cuerpo_principal)     
         ImagesScreen(self.cuerpo_principal, self.app_logic)
     
-    # def reproduce_music(self):
-    #     self.limpiar_panel(self.cuerpo_principal)     
-    #     ImagesScreen(self.cuerpo_principal, self.app_logic)
+    def reproduce_music(self):
+        self.limpiar_panel(self.cuerpo_principal)     
+        MusicScreen(self.cuerpo_principal, self.app_logic)

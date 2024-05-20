@@ -21,7 +21,7 @@ class ImagesScreen:
 
         # Primer Label con texto
         self.labelTitulo = tk.Label(
-            self.barra_sup, text="Configuración de Red")
+            self.barra_sup, text="Presentación de Imágenes en USB")
         self.labelTitulo.config(fg="#222d33", font=("Roboto", 30), bg=COLOR_CUERPO_PRINCIPAL, pady=50)
         self.labelTitulo.pack(side=tk.TOP, fill='both', expand=True)
 
