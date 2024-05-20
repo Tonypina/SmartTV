@@ -36,7 +36,7 @@ class VideoScreen:
             self.video_listbox.insert(tk.END, video)
 
         # Botón de reproducir
-        self.play_button = tk.Button(self.barra_inf, text="Reproducir", font=("Roboto", 20), command=self.play_video)
+        self.play_button = tk.Button(self.barra_inf, text="Reproducir", font=("Roboto", 20), command=self.abrir_video_frame)
         self.play_button.pack(side=tk.BOTTOM, fill=tk.X, expand=False)
 
     def limpiar_panel(self, panel):
