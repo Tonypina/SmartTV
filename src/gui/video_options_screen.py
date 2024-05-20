@@ -41,16 +41,12 @@ class VideoScreen:
 
         # Botón de reproducir
         self.play_button = tk.Button(self.barra_der, text="Reproducir", font=("Roboto", 20), command=self.play_video)
-        self.play_button.pack(side=tk.TOP, fill='both', expand=True)
+        self.play_button.pack(side=tk.TOP, fill=tk.X, expand=True)
 
         # Botón de salir de pantalla completa
         self.exit_button = tk.Button(self.barra_der, text="Salir de Pantalla Completa", font=("Roboto", 20), command=self.exit_fullscreen)
         self.exit_button.pack(side=tk.TOP, fill='both', expand=True)
         self.exit_button.pack_forget()  # Ocultar el botón al inicio
-
-        # Área de video
-        self.video_panel = tk.Frame(self.barra_der, bg="black")
-        self.video_panel.pack(side=tk.TOP, fill="both", expand=True)
 
         # Inicializar VLC player para integrar con tkinter
         self.instance = vlc.Instance()
@@ -59,42 +55,11 @@ class VideoScreen:
         # Vincular la tecla Escape para salir de pantalla completa
         self.panel_principal.bind("<Escape>", self.exit_fullscreen)
 
-    def play_video(self):
-        selected_video_index = self.video_listbox.curselection()
-        if not selected_video_index:
-            return
-        
-        selected_video = self.video_files[selected_video_index[0]]
-        video_path = os.path.join("/home/pi/usb", selected_video)
+    def limpiar_panel(self, panel):
+    # Función para limpiar el contenido del panel
+        for widget in panel.winfo_children():
+            widget.destroy()
 
-        # Detener el video actual si está reproduciéndose
-        self.player.stop()
-
-        # Crear un nuevo media y reproducirlo
-        media = self.instance.media_new(video_path)
-        self.player.set_media(media)
-
-        # Configurar el panel de video en el tkinter frame
-        handle = self.video_panel.winfo_id()
-        self.player.set_hwnd(handle)
-
-        # Reproducir el video
-        self.player.play()
-
-        # Cambiar a pantalla completa
-        self.enter_fullscreen()
-
-    def enter_fullscreen(self):
-        self.is_fullscreen = True
-        self.panel_principal.attributes('-fullscreen', True)
-        self.barra_sup.pack_forget()
-        self.barra_izq.pack_forget()
-        self.exit_button.pack(side=tk.TOP, fill='both', expand=True)
-
-    def exit_fullscreen(self, event=None):
-        if self.is_fullscreen:
-            self.is_fullscreen = False
-            self.panel_principal.attributes('-fullscreen', False)
-            self.barra_sup.pack(side=tk.TOP, fill=tk.X, expand=False)
-            self.barra_izq.pack(side=tk.LEFT, fill="both", expand=True)
-            self.exit_button.pack_forget()
+    def abrir_video_frame(self):
+        self.limpiar_panel(self.panel_principal)     
+        VideoFrame(self.panel_principal, self.app_logic, self.video_files[selected_video_index[0]])
