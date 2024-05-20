@@ -38,6 +38,7 @@ class VideoFrame:
         self.player.event_manager().event_attach(vlc.EventType.MediaPlayerEndReached, self.on_end)
 
     def on_end(self, event):
+        print("On end")
         self.current_video_index = (self.current_video_index + 1) % len(self.video_files)
         self.play_video()
 
