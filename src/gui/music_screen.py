@@ -49,6 +49,7 @@ class MusicScreen:
             # Cargar y reproducir la canción
             pygame.mixer.music.load(music_path)
             pygame.mixer.music.play()
+            pygame.event.wait()
 
             # Incrementar el índice de la canción actual
             self.current_music_index = (self.current_music_index + 1) % len(self.music_files)
