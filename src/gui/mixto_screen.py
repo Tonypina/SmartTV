@@ -12,6 +12,9 @@ class MixtoScreen():
 
     def __init__(self, panel_principal, app_logic):
         
+        self.cuerpo_principal = panel_principal
+        self.app_logic = app_logic
+
         self.button_width = 250
         self.button_height = 250
         self.button_font = font.Font(family='FontAwesome', size=15)
@@ -83,13 +86,13 @@ class MixtoScreen():
             widget.destroy()
 
     def abrir_music_screen(self):
-        self.limpiar_panel(panel_principal)     
-        MusicScreen(panel_principal, app_logic)
+        self.limpiar_panel(self.cuerpo_principal)     
+        MusicScreen(self.cuerpo_principal, self.app_logic)
 
     def abrir_images_screen(self):
-        self.limpiar_panel(panel_principal)     
-        ImagesScreen(panel_principal, app_logic)
+        self.limpiar_panel(self.cuerpo_principal)     
+        ImagesScreen(self.cuerpo_principal, self.app_logic)
 
     def abrir_video_options_screen(self):
-        self.limpiar_panel(panel_principal)     
-        VideoOptions(panel_principal, app_logic)
+        self.limpiar_panel(self.cuerpo_principal)     
+        VideoOptions(self.cuerpo_principal, self.app_logic)
