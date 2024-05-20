@@ -24,7 +24,7 @@ class VideoFrame:
         self.play_video()
 
         # Vincular la tecla Escape para salir de pantalla completa
-        self.panel_principal.bind("<Return>", lambda event: self.regresar(event))
+        self.panel_principal.bind("<Key>", lambda event: self.regresar(event))
 
     def play_video(self):
         
