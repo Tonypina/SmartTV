@@ -7,10 +7,11 @@ import time
 from gui.home_screen import HomeScreen
 
 class VideoFrame:
-    def __init__(self, panel_principal, app_logic, video_file):
+    def __init__(self, panel_principal, app_logic, video_files):
         self.panel_principal = panel_principal
         self.app_logic = app_logic
-        self.video_file = video_file
+        self.video_files = video_files
+        self.current_video_index = 0
         self.player = vlc.MediaPlayer()
                 
         # Inicializar VLC player para integrar con tkinter
@@ -24,12 +25,13 @@ class VideoFrame:
         self.detenerButton = tk.Button(self.panel_principal, text="Detener", font=("Roboto", 20), command=self.regresar)
         self.detenerButton.pack(side=tk.TOP, padx=10, pady=10)
 
+        # Conectar evento de fin de reproducción
+        self.player.event_manager().event_attach(vlc.EventType.MediaPlayerEndReached, self.on_end)
+
         self.play_video()
 
-
     def play_video(self):
-        
-        selected_video = self.video_file
+        selected_video = self.video_files[self.current_video_index]
         video_path = os.path.join("/home/pi/usb", selected_video)
 
         # Detener el video actual si está reproduciéndose
@@ -46,16 +48,18 @@ class VideoFrame:
         # Reproducir el video
         self.player.play()
 
-    def limpiar_panel(self,panel):
-    # Función para limpiar el contenido del panel
+    def on_end(self, event):
+        # Incrementar el índice del video
+        self.current_video_index = (self.current_video_index + 1) % len(self.video_files)
+        # Reproducir el siguiente video
+        self.play_video()
+
+    def limpiar_panel(self, panel):
+        # Función para limpiar el contenido del panel
         for widget in panel.winfo_children():
             widget.destroy()
 
     def regresar(self):
-        
         self.player.stop()
-
         self.limpiar_panel(self.panel_principal)     
         HomeScreen(self.panel_principal, self.app_logic)
-
-

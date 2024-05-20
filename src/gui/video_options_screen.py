@@ -33,8 +33,10 @@ class VideoScreen:
         for video in self.video_files:
             self.create_video_button(video)
 
+        self.sendAllbutton = tk.Button(self.barra_inf, text="Reproducir todos", font=("Roboto", 20), command=lambda: self.abrir_video_frame(self.video_files))
+
     def create_video_button(self, video):
-        button = tk.Button(self.barra_inf, text=video, font=("Roboto", 20), command=lambda: self.abrir_video_frame(video))
+        button = tk.Button(self.barra_inf, text=video, font=("Roboto", 20), command=lambda: self.abrir_video_frame([video]))
         button.pack(fill=tk.X, pady=5)
 
     def limpiar_panel(self, panel):
@@ -42,7 +44,7 @@ class VideoScreen:
         for widget in panel.winfo_children():
             widget.destroy()
 
-    def abrir_video_frame(self, video):
+    def abrir_video_frame(self, videos):
         self.limpiar_panel(self.panel_principal)
-        VideoFrame(self.panel_principal, self.app_logic, video)
+        VideoFrame(self.panel_principal, self.app_logic, videos)
 
