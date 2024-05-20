@@ -30,7 +30,7 @@ class SmartTVAppGUI(tk.Tk):
         self.controles_barra_superior()        
         self.controles_menu_lateral()
         self.controles_cuerpo(self.app_logic)
-        self.bind('<Escape>', self.exit_app)
+        # self.bind('<Escape>', self.exit_app)
 
         # Iniciar el hilo para detectar la inserción de USB
         self.usb_monitor_thread = threading.Thread(target=self.monitor_usb)
