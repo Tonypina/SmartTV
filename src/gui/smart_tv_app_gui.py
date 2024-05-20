@@ -147,6 +147,7 @@ class SmartTVAppGUI(tk.Tk):
             widget.destroy()
 
     def exit_app(self, event=None):
+        self.app_logic.umount_usb()
         self.destroy()
 
     def monitor_usb(self):
