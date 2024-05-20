@@ -26,7 +26,7 @@ class VideoFrame:
         self.detenerButton.pack(side=tk.TOP, padx=10, pady=10)
 
         # Conectar evento de fin de reproducción
-        self.player.event_manager().event_attach(vlc.EventType.MediaPlayerEndReached, self.on_end)
+        self.player.event_manager().event_attach(vlc.EventType.MediaPlayerEndReached, lambda: self.on_end())
 
         self.play_video()
 
