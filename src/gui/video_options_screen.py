@@ -29,12 +29,13 @@ class VideoScreen:
         self.labelTitulo.config(fg="#222d33", font=("Roboto", 30), pady=50)
         self.labelTitulo.pack(side=tk.TOP, fill='both', expand=True)
 
+        self.sendAllbutton = tk.Button(self.barra_inf, text="Reproducir todos", font=("Roboto", 20), command=lambda: self.abrir_video_frame(self.video_files))
+        self.sendAllbutton.pack(fill=tk.X, paddy=5, side=tk.BOTTOM)
+        
         # Crear botones para cada video
         for video in self.video_files:
             self.create_video_button(video)
 
-        self.sendAllbutton = tk.Button(self.barra_inf, text="Reproducir todos", font=("Roboto", 20), command=lambda: self.abrir_video_frame(self.video_files))
-        self.sendAllbutton.pack(fill=tk.X, paddy=5, side=tk.BOTTOM)
 
     def create_video_button(self, video):
         button = tk.Button(self.barra_inf, text=video, font=("Roboto", 20), command=lambda: self.abrir_video_frame([video]))
