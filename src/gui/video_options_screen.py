@@ -65,7 +65,7 @@ class VideoScreen:
             return
         
         selected_video = self.video_files[selected_video_index[0]]
-        video_path = os.path.join("/home/pi/usb/", selected_video)
+        video_path = os.path.join("/home/pi/usb", selected_video)
 
         # Detener el video actual si está reproduciéndose
         self.player.stop()
