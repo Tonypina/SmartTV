@@ -12,6 +12,7 @@ from gui.network_screen import NetworkScreen
 from gui.video_options_screen import VideoOptions
 from gui.images_screen import ImagesScreen
 from gui.music_screen import MusicScreen
+from gui.mixto_screen import MixtoScreen
 from gui.usb_screen import USBScreen
 
 class SmartTVAppGUI(tk.Tk):
@@ -165,10 +166,9 @@ class SmartTVAppGUI(tk.Tk):
             elif (type == 1):
                 self.abrir_images_screen()
             elif (type == 2):
-                pass
-                # self.reproduce_music()
+                self.reproduce_music()
             elif (type == 3):
-                pass
+                self.abrir_mixto_screen()
         else:
             print("Error al leer la USB")
 
@@ -183,3 +183,7 @@ class SmartTVAppGUI(tk.Tk):
     def reproduce_music(self):
         self.limpiar_panel(self.cuerpo_principal)     
         MusicScreen(self.cuerpo_principal, self.app_logic)
+    
+    def abrir_mixto_screen(self):
+        self.limpiar_panel(self.cuerpo_principal)     
+        MixtoScreen(self.cuerpo_principal, self.app_logic)
