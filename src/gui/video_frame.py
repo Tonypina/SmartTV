@@ -24,7 +24,7 @@ class VideoFrame:
         selected_video = self.video_files[self.current_video_index]
         video_path = os.path.join("/home/pi/usb", selected_video)
 
-        self.player.stop()  # Detener la reproducción actual
+        # self.player.stop()  # Detener la reproducción actual
 
         media = self.instance.media_new(video_path)
         self.player.set_media(media)
@@ -40,6 +40,7 @@ class VideoFrame:
     def on_end(self, event):
         print("On end")
         self.current_video_index = (self.current_video_index + 1) % len(self.video_files)
+        print(self.current_video_index)
         self.play_video()
 
     def limpiar_panel(self, panel):
