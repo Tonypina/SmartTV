@@ -21,6 +21,7 @@ class VideoFrame:
         self.play_video()
 
     def play_video(self):
+        len(self.video_files)
         selected_video = self.video_files[self.current_video_index]
         video_path = os.path.join("/home/pi/usb", selected_video)
 
@@ -40,7 +41,6 @@ class VideoFrame:
     def on_end(self, event):
         print("On end")
         self.current_video_index = (self.current_video_index + 1) % len(self.video_files)
-        print(self.current_video_index)
         self.play_video()
 
     def limpiar_panel(self, panel):
