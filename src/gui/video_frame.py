@@ -3,10 +3,6 @@ import tkinter as tk
 from tkinter import ttk
 import vlc
 
-def get_video_files(directory="/home/pi/usb"):
-    video_extensions = ['.mp4', '.avi', '.mkv', '.mov', '.wmv']
-    return [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f)) and os.path.splitext(f)[1].lower() in video_extensions]
-
 class VideoFrame:
     def __init__(self, panel_principal, app_logic, video_file):
         self.panel_principal = panel_principal
@@ -26,8 +22,7 @@ class VideoFrame:
         # self.panel_principal.bind("<Escape>", self.exit_fullscreen)
 
     def play_video(self):
-        selected_video_index = self.video_listbox.curselection()
-        if not selected_video_index:
+        if not self.video_listbox.curselection():
             return
         
         selected_video = self.video_file

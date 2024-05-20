@@ -22,7 +22,7 @@ class VideoScreen:
 
         # Crear paneles: barra derecha
         self.barra_inf = tk.Frame(panel_principal)
-        self.barra_inf.pack(side=tk.BOTTOM, fill=tk.X, expand=False)
+        self.barra_inf.pack(side=tk.BOTTOM, fill=tk.X, expand=True)
 
         # Título
         self.labelTitulo = tk.Label(self.barra_sup, text="Selecciona un Video")
@@ -31,7 +31,7 @@ class VideoScreen:
 
         # Lista de videos
         self.video_listbox = tk.Listbox(self.barra_inf, font=("Roboto", 20))
-        self.video_listbox.pack(side=tk.LEFT, fill="both", expand=True)
+        self.video_listbox.pack(side=tk.TOP, fill="both", expand=True)
         for video in self.video_files:
             self.video_listbox.insert(tk.END, video)
 
