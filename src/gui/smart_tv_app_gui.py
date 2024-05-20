@@ -92,7 +92,7 @@ class SmartTVAppGUI(tk.Tk):
 
         buttons_info = [
             ("Home", "\uf109", self.buttonHome, self.abrir_home_screen ),
-            ("Reproducir disco extraible", "\uf013", self.buttonUSB, self.abrir_usb_screen),
+            ("Reproducir disco extraible", "\uf013", self.buttonUSB, self.abrir_mixto_screen),
             ("Configuración de Red", "\uf013", self.buttonNetwork, self.abrir_network_screen),
         ]
 
@@ -161,7 +161,7 @@ class SmartTVAppGUI(tk.Tk):
     def usb_inserted(self):
         type = self.app_logic.usb_inserted()
 
-        if (type > 0) :
+        if (type) :
             if (type == 0):
                 self.abrir_video_options_screen()
             elif (type == 1):

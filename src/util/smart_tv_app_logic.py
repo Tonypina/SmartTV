@@ -57,9 +57,22 @@ class SmartTVAppLogic:
 
         return redes
 
-    def connect_to_network(self, network, password):
-        # Simulación de conexión a una red
-        print(f"Conectando a la red '{network}' con la contraseña '{password}'")
+    def connect_to_network(self, ssid, password):
+        try:
+            # Borrar la conexión si ya existe
+            subprocess.run(['nmcli', 'connection', 'delete', ssid], stderr=subprocess.DEVNULL)
+            
+            # Crear una nueva conexión
+            result = subprocess.run(['nmcli', 'device', 'wifi', 'connect', ssid, 'password', password], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            
+            if result.returncode == 0:
+                return True
+
+            else:
+                return False
+
+        except Exception as e:
+            return False
 
     def usb_inserted(self):
         
