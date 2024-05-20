@@ -2,6 +2,9 @@ MIT License
 
 Copyright (c) [2023] [González Cuellar Arturo].
 Copyright (c) [2023] [Páez López Didier Marcelo].
+Copyright (c) [2024] [Colon Palacios Emmanuel].
+Copyright (c) [2024] [Piña Rossete Marco Antonio].
+Copyright (c) [2024] [San Miguel Iturria Cecilia Fernanda].
 
 Permission is granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software").
 of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including but not limited to
@@ -19,4 +22,5 @@ FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS SHALL IN NO EVENT BE LIABLE FOR ANY CLAIM, DAMAGE OR OTHER LIABILITY, WHETHER IN AN ACTION OF
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING OUT OF,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-SOFTWARE.
+
+This license permits free use of the software on the condition that the copyright and permission notices are maintained in all copies of the software.
