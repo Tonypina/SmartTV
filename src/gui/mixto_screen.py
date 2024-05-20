@@ -95,4 +95,4 @@ class MixtoScreen():
 
     def abrir_video_options_screen(self):
         self.limpiar_panel(self.cuerpo_principal)     
-        VideoOptions(self.cuerpo_principal, self.app_logic)
+        VideoScreen(self.cuerpo_principal, self.app_logic)
