@@ -4,7 +4,7 @@ from config import COLOR_BARRA_SUPERIOR, COLOR_MENU_LATERAL, COLOR_CUERPO_PRINCI
 from util.smart_tv_app_logic import SmartTVAppLogic
 import util.util_imagenes as util_img
 
-from gui.video_options_screen import VideoOptions
+from gui.video_options_screen import VideoScreen
 from gui.images_screen import ImagesScreen
 from gui.music_screen import MusicScreen
 
