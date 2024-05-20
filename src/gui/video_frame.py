@@ -24,22 +24,26 @@ class VideoFrame:
         selected_video = self.video_files[self.current_video_index]
         video_path = os.path.join("/home/pi/usb", selected_video)
 
-        # self.player.stop()  # Detener la reproducción actual
+        try:
+            self.player.stop()  # Detener la reproducción actual
 
-        media = self.instance.media_new(video_path)
-        self.player.set_media(media)
+            media = self.instance.media_new(video_path)
+            self.player.set_media(media)
 
-        handle = self.video_panel.winfo_id()
-        self.player.set_xwindow(handle)
+            handle = self.video_panel.winfo_id()
+            self.player.set_xwindow(handle)
 
-        self.player.play()
+            self.player.play()
 
-        # Conectar evento de fin de reproducción
-        self.player.event_manager().event_attach(vlc.EventType.MediaPlayerEndReached, self.on_end)
+            # Conectar evento de fin de reproducción
+            self.player.event_manager().event_attach(vlc.EventType.MediaPlayerEndReached, self.on_end)
+        except Exception as e:
+            print(f"Error al reproducir el video: {e}")
 
     def on_end(self, event):
-        print("On end")
+        # Incrementar el índice del video
         self.current_video_index = (self.current_video_index + 1) % len(self.video_files)
+        # Reproducir el siguiente video
         self.play_video()
 
     def limpiar_panel(self, panel):
@@ -48,5 +52,5 @@ class VideoFrame:
 
     def regresar(self):
         self.player.stop()
-        self.limpiar_panel(self.panel_principal)     
+        self.limpiar_panel(self.panel_principal)   
         HomeScreen(self.panel_principal, self.app_logic)
