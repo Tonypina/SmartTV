@@ -29,8 +29,9 @@ A Python graphical user interface (GUI) application to simulate a Smart TV inter
 - This code uses the VLC library for media playback. Make sure you have VLC installed on your system.
 
 ## Authors
-
+Colon Palacios Emmanuel
 Piña Rossette Marco Antonio
+San Miguel Iturria Cecilia Fernanda
 
 ## License
 
