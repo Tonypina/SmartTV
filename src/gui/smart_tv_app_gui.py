@@ -13,7 +13,6 @@ from gui.video_options_screen import VideoOptions
 from gui.images_screen import ImagesScreen
 from gui.music_screen import MusicScreen
 from gui.mixto_screen import MixtoScreen
-from gui.usb_screen import USBScreen
 
 class SmartTVAppGUI(tk.Tk):
 
