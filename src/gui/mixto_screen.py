@@ -42,11 +42,11 @@ class MixtoScreen():
         self.labelTitulo.pack(side=tk.TOP, fill='both', expand=True)
 
         self.buttonVideo = tk.Button( self.superior_row )
-        self.videoImg = util_img.leer_imagen("./../src/img/Video.png", (self.button_width, self.button_height))
+        self.videoImg = util_img.leer_imagen("./../img/Video.png", (self.button_width, self.button_height))
         self.buttonImagen = tk.Button( self.superior_row )
-        self.imagenImg = util_img.leer_imagen("./../src/img/Imagen.png", (self.button_width, self.button_height))
+        self.imagenImg = util_img.leer_imagen("./../img/Imagen.png", (self.button_width, self.button_height))
         self.buttonMusica = tk.Button( self.superior_row )
-        self.musicaImg = util_img.leer_imagen("./../src/img/Musica.png", (self.button_width, self.button_height))
+        self.musicaImg = util_img.leer_imagen("./../img/Musica.png", (self.button_width, self.button_height))
 
         buttons_info = [
             ("Video", self.videoImg, self.buttonVideo, self.abrir_video_options_screen),
