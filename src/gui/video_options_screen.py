@@ -34,11 +34,11 @@ class VideoScreen:
             self.create_video_button(video)
 
         self.sendAllbutton = tk.Button(self.barra_inf, text="Reproducir todos", font=("Roboto", 20), command=lambda: self.abrir_video_frame(self.video_files))
-        self.sendAllbutton.pack(fill=tk.X, paddy=5)
+        self.sendAllbutton.pack(fill=tk.X, paddy=5, side=tk.BOTTOM)
 
     def create_video_button(self, video):
         button = tk.Button(self.barra_inf, text=video, font=("Roboto", 20), command=lambda: self.abrir_video_frame([video]))
-        button.pack(fill=tk.X, pady=5)
+        button.pack(fill=tk.X, pady=5, side=tk.TOP)
 
     def limpiar_panel(self, panel):
         # Función para limpiar el contenido del panel
