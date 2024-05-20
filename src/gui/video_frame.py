@@ -38,9 +38,7 @@ class VideoFrame:
 
         # Configurar el panel de video en el tkinter frame
         handle = self.video_panel.winfo_id()
-        self.player.set_hwnd(handle)
+        self.player.set_xwindow(handle)
 
         # Reproducir el video
         self.player.play()
-
-        time.sleep(10)
