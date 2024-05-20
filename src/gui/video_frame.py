@@ -4,7 +4,7 @@ from tkinter import ttk
 import vlc
 import time
 
-from gui.video_options_screen import VideoScreen
+from gui.home_screen import HomeScreen
 
 class VideoFrame:
     def __init__(self, panel_principal, app_logic, video_file):
@@ -53,8 +53,8 @@ class VideoFrame:
     def regresar(self):
         
         self.player.stop()
-        
+
         self.limpiar_panel(self.panel_principal)     
-        VideoScreen(self.panel_principal, self.app_logic)
+        HomeScreen(self.panel_principal, self.app_logic)
 
 
