@@ -1,7 +1,6 @@
 import os
 import time
 import threading
-import pyudev
 import vlc
 import subprocess
 from tkinter import filedialog
@@ -186,30 +185,22 @@ class SmartTVAppLogic:
         #     print("Failed to mount the USB device")
 
     def mount_usb(self, device_node):
-        # Find the partition corresponding to the device node
-        context = pyudev.Context()
-        device = pyudev.Device.from_device_file(context, device_node)
-        if device:
-            partition = None
-            for child in device.children:
-                if child.device_type == 'partition':
-                    partition = child.device_node
-                    break
+        try:
+            result = subprocess.run(['mount', '/dev/sda1', '/mnt/usb'],
+                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            if result.returncode == 0:
+                output = result.stdout.decode('utf-8').strip()
+                mount_path = output.split()[-1]
 
-            if partition:
-                mount_point = f"/mnt/{os.path.basename(partition)}"
-                os.makedirs(mount_point, exist_ok=True)
-                try:
-                    subprocess.run(['mount', partition, mount_point], check=True)
-                    print(f"Mounted {partition} at {mount_point}")
-                    return mount_point
-                    # self.check_usb_content(mount_point)
-                except subprocess.CalledProcessError as e:
-                    print(f"Error mounting USB: {e}")
+                print(mount_path)
+
+                return mount_path
             else:
-                print("No partition found on the USB device.")
-        else:
-            print("Device not found.")
+                print(f"Error mounting USB: {result.stderr.decode('utf-8')}")
+                return None
+        except Exception as e:
+            print(f"Exception mounting USB: {e}")
+            return None
 
     def analyze_usb_content(self, usb_path):
         video_ext = ('.mp4', '.avi', '.mov', '.mkv')
