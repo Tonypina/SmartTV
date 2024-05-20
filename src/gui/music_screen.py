@@ -13,6 +13,7 @@ class MusicScreen:
         self.app_logic = app_logic
 
         # Inicializar pygame mixer
+        pygame.init()
         pygame.mixer.init()
 
         # Crear paneles: barra sup
