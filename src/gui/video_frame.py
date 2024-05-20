@@ -2,6 +2,7 @@ import os
 import tkinter as tk
 from tkinter import ttk
 import vlc
+import time
 
 class VideoFrame:
     def __init__(self, panel_principal, app_logic, video_file):
@@ -41,3 +42,5 @@ class VideoFrame:
 
         # Reproducir el video
         self.player.play()
+
+        time.sleep(10)
