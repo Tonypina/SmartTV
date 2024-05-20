@@ -30,6 +30,10 @@ class MusicScreen:
         self.vlc_instance = vlc.Instance()
         self.player = self.vlc_instance.media_player_new()
 
+        # Configurar la salida de audio
+        audio_output = 'alsa'  # Puedes cambiar esto a 'pulse', 'waveout', etc. según tu sistema
+        self.player.audio_output_set(audio_output)
+
         # Lista de archivos de música
         self.music_files = self.load_music_from_directory('/home/pi/usb')
         self.current_music_index = 0
