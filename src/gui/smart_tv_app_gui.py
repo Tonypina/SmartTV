@@ -151,4 +151,4 @@ class SmartTVAppGUI(tk.Tk):
         monitor.filter_by(subsystem='usb')
         for device in iter(monitor.poll, None):
             if device.action == 'add':
-                self.after(0, self.app_logic.usb_inserted, device.device_node)
+                self.after(3000, self.app_logic.usb_inserted, device.device_node)
