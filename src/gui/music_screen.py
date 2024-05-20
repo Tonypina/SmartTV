@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import os
-import pygame
+import vlc
 
 # Configuración de color (puedes ajustar según tus necesidades)
 COLOR_CUERPO_PRINCIPAL = "#ffffff"
@@ -11,10 +11,6 @@ class MusicScreen:
     def __init__(self, panel_principal, app_logic):
         self.panel_principal = panel_principal
         self.app_logic = app_logic
-
-        # Inicializar pygame mixer
-        pygame.init()
-        pygame.mixer.init()
 
         # Crear paneles: barra sup
         self.barra_sup = tk.Frame(panel_principal)
@@ -30,12 +26,19 @@ class MusicScreen:
         self.labelTitulo.config(fg="#222d33", font=("Roboto", 30), bg=COLOR_CUERPO_PRINCIPAL, pady=50)
         self.labelTitulo.pack(side=tk.TOP, fill='both', expand=True)
 
+        # Inicializar VLC player
+        self.vlc_instance = vlc.Instance()
+        self.player = self.vlc_instance.media_player_new()
+
         # Lista de archivos de música
         self.music_files = self.load_music_from_directory('/home/pi/usb')
         self.current_music_index = 0
 
         # Iniciar la reproducción de música
         self.play_next_song()
+
+        # Verificar el estado del reproductor periódicamente
+        self.panel_principal.after(1000, self.check_music_end)
 
     def load_music_from_directory(self, directory):
         supported_formats = ('.mp3', '.wav', '.ogg', '.flac')
@@ -47,21 +50,19 @@ class MusicScreen:
             music_path = self.music_files[self.current_music_index]
 
             # Cargar y reproducir la canción
-            pygame.mixer.music.load(music_path)
-            pygame.mixer.music.play()
-            pygame.event.wait()
+            media = self.vlc_instance.media_new(music_path)
+            self.player.set_media(media)
+            self.player.play()
 
             # Incrementar el índice de la canción actual
             self.current_music_index = (self.current_music_index + 1) % len(self.music_files)
-
-            # Configurar evento para cuando termine la canción
-            pygame.mixer.music.set_endevent(pygame.USEREVENT)
-            self.panel_principal.after(100, self.check_music_end)
         else:
             self.labelTitulo.config(text="No hay archivos de música en el directorio especificado")
 
     def check_music_end(self):
-        for event in pygame.event.get():
-            if event.type == pygame.USEREVENT:
-                self.play_next_song()
-        self.panel_principal.after(100, self.check_music_end)
+        # Si la música no se está reproduciendo, reproducir la siguiente canción
+        if not self.player.is_playing():
+            self.play_next_song()
+        
+        # Volver a verificar el estado del reproductor después de un tiempo
+        self.panel_principal.after(1000, self.check_music_end)
