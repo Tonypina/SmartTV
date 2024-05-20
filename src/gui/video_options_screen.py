@@ -20,10 +20,6 @@ class VideoScreen:
         self.barra_sup = tk.Frame(panel_principal)
         self.barra_sup.pack(side=tk.TOP, fill=tk.X, expand=False)
 
-        # Crear paneles: barra izquierda
-        self.barra_med = tk.Frame(panel_principal)
-        self.barra_med.pack(side=tk.TOP, fill="both", expand=True)
-
         # Crear paneles: barra derecha
         self.barra_inf = tk.Frame(panel_principal)
         self.barra_inf.pack(side=tk.BOTTOM, fill=tk.X, expand=False)
@@ -34,14 +30,14 @@ class VideoScreen:
         self.labelTitulo.pack(side=tk.TOP, fill='both', expand=True)
 
         # Lista de videos
-        self.video_listbox = tk.Listbox(self.barra_med, font=("Roboto", 20))
+        self.video_listbox = tk.Listbox(self.barra_inf, font=("Roboto", 20))
         self.video_listbox.pack(side=tk.LEFT, fill="both", expand=True)
         for video in self.video_files:
             self.video_listbox.insert(tk.END, video)
 
         # Botón de reproducir
         self.play_button = tk.Button(self.barra_inf, text="Reproducir", font=("Roboto", 20), command=self.play_video)
-        self.play_button.pack(side=tk.TOP, fill=tk.X, expand=True)
+        self.play_button.pack(side=tk.BOTTOM, fill=tk.X, expand=False)
 
     def limpiar_panel(self, panel):
     # Función para limpiar el contenido del panel
