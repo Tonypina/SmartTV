@@ -22,7 +22,7 @@ class VideoScreen:
 
         # Crear paneles: barra izquierda
         self.barra_med = tk.Frame(panel_principal)
-        self.barra_med.pack(side=tk.CENTER, fill="both", expand=True)
+        self.barra_med.pack(side=tk.TOP, fill="both", expand=True)
 
         # Crear paneles: barra derecha
         self.barra_inf = tk.Frame(panel_principal)
