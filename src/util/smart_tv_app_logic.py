@@ -186,7 +186,7 @@ class SmartTVAppLogic:
 
     def mount_usb(self, device_node):
         try:
-            result = subprocess.run(['mount', '/dev/sda1', '/home/pi/usb'],
+            result = subprocess.run(['sudo', 'mount', '/dev/sda1', '/home/pi/usb'],
                                     stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             if result.returncode == 0:
                 output = result.stdout.decode('utf-8').strip()
