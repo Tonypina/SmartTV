@@ -21,7 +21,7 @@ class VideoFrame:
         self.video_panel = tk.Frame(self.panel_principal, bg="black")
         self.video_panel.pack(side=tk.TOP, fill="both", expand=True)
 
-        self.detenerButton = tk.Button(self.panel_principal, text="Conectar", font=("Roboto", 20), command=self.regresar)
+        self.detenerButton = tk.Button(self.panel_principal, text="Detener", font=("Roboto", 20), command=self.regresar)
         self.detenerButton.pack(side=tk.TOP, padx=10, pady=10)
 
         self.play_video()

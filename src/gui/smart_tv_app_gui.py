@@ -102,7 +102,7 @@ class SmartTVAppGUI(tk.Tk):
         HomeScreen(self.cuerpo_principal, app_logic)
   
     def configurar_boton_menu(self, button, text, icon, font_awesome, ancho_menu, alto_menu, comando):
-        button.config(text=f"  {icon}    {text}", anchor="w", font=font_awesome,
+        button.config(text=f"      {text}", anchor="w", font=font_awesome,
                       bd=0, bg=COLOR_MENU_LATERAL, fg="white", width=ancho_menu, height=alto_menu,
                       command = comando)
         button.pack(side=tk.TOP)
