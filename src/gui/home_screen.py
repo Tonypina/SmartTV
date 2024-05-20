@@ -35,17 +35,17 @@ class HomeScreen():
         self.labelTitulo.pack(side=tk.TOP, fill='both', expand=True)
 
         self.buttonNetflix = tk.Button( self.superior_row )
-        self.nextflixImg = util_img.leer_imagen("./../src/img/Netflix.png", (self.button_width, self.button_height))
+        self.nextflixImg = util_img.leer_imagen("./../img/Netflix.png", (self.button_width, self.button_height))
         self.buttonGoogle = tk.Button( self.superior_row )
-        self.googleImg = util_img.leer_imagen("./../src/img/Google.png", (self.button_width, self.button_height))
+        self.googleImg = util_img.leer_imagen("./../img/Google.png", (self.button_width, self.button_height))
         self.buttonYoutube = tk.Button( self.superior_row )
-        self.youtubeImg = util_img.leer_imagen("./../src/img/Youtube.png", (self.button_width, self.button_height))
+        self.youtubeImg = util_img.leer_imagen("./../img/Youtube.png", (self.button_width, self.button_height))
         self.buttonSpotify = tk.Button( self.inferior_row )
-        self.spotifyImg = util_img.leer_imagen("./../src/img/Spotify.png", (self.button_width, self.button_height))
+        self.spotifyImg = util_img.leer_imagen("./../img/Spotify.png", (self.button_width, self.button_height))
         self.buttonHBO = tk.Button( self.inferior_row )
-        self.HBOImg = util_img.leer_imagen("./../src/img/HBO.png", (self.button_width, self.button_height))
+        self.HBOImg = util_img.leer_imagen("./../img/HBO.png", (self.button_width, self.button_height))
         self.buttonF1 = tk.Button( self.inferior_row )
-        self.F1Img = util_img.leer_imagen("./../src/img/F1.png", (self.button_width, self.button_height))
+        self.F1Img = util_img.leer_imagen("./../img/F1.png", (self.button_width, self.button_height))
 
         buttons_info = [
             ("Netflix", self.nextflixImg, self.buttonNetflix, app_logic.open_netflix_kiosk),
