@@ -185,20 +185,15 @@ class SmartTVAppLogic:
         #     print("Failed to mount the USB device")
 
     def mount_usb(self, device_node):
+        mount_point = f"/mnt/{os.path.basename(partition)}"
+        os.makedirs(mount_point, exist_ok=True)
         try:
-            result = subprocess.run(['udisksctl', 'mount', '--no-user-interaction', '--block-device', device_node],
-                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            if result.returncode == 0:
-                output = result.stdout.decode('utf-8').strip()
-                mount_path = output.split()[-1]
-
-                return mount_path
-            else:
-                print(f"Error mounting USB: {result.stderr.decode('utf-8')}")
-                return None
-        except Exception as e:
-            print(f"Exception mounting USB: {e}")
-            return None
+            subprocess.run(['mount', partition, mount_point], check=True)
+            print(f"Mounted {partition} at {mount_point}")
+            return mount_point
+            # self.check_usb_content(mount_point)
+        except subprocess.CalledProcessError as e:
+            print(f"Error mounting USB: {e}")
 
     def analyze_usb_content(self, usb_path):
         video_ext = ('.mp4', '.avi', '.mov', '.mkv')
