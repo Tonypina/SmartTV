@@ -4,6 +4,8 @@ from tkinter import ttk
 import vlc
 import time
 
+from gui.video_options_screen import VideoScreen
+
 class VideoFrame:
     def __init__(self, panel_principal, app_logic, video_file):
         self.panel_principal = panel_principal
@@ -22,7 +24,7 @@ class VideoFrame:
         self.play_video()
 
         # Vincular la tecla Escape para salir de pantalla completa
-        # self.panel_principal.bind("<Escape>", self.exit_fullscreen)
+        self.panel_principal.bind("<x>", self.regresar)
 
     def play_video(self):
         
@@ -42,3 +44,17 @@ class VideoFrame:
 
         # Reproducir el video
         self.player.play()
+
+    def limpiar_panel(self,panel):
+    # Función para limpiar el contenido del panel
+        for widget in panel.winfo_children():
+            widget.destroy()
+
+    def regresar(self):
+        
+        self.player.stop()
+        
+        self.limpiar_panel(self.panel_principal)     
+        VideoScreen(self.panel_principal, self.app_logic)
+
+
