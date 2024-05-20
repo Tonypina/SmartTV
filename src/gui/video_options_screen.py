@@ -3,6 +3,8 @@ import tkinter as tk
 from tkinter import ttk
 import vlc
 
+from gui.video_frame import VideoFrame
+
 def get_video_files(directory="/home/pi/usb"):
     video_extensions = ['.mp4', '.avi', '.mkv', '.mov', '.wmv']
     return [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f)) and os.path.splitext(f)[1].lower() in video_extensions]
