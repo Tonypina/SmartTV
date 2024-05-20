@@ -9,7 +9,7 @@ import pyudev
 # Nuevo
 from gui.home_screen import HomeScreen
 from gui.network_screen import NetworkScreen
-from gui.video_options_screen import VideoOptions
+from gui.video_options_screen import VideoScreen
 from gui.images_screen import ImagesScreen
 from gui.music_screen import MusicScreen
 from gui.mixto_screen import MixtoScreen
