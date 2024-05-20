@@ -21,10 +21,11 @@ class VideoFrame:
         self.video_panel = tk.Frame(self.panel_principal, bg="black")
         self.video_panel.pack(side=tk.TOP, fill="both", expand=True)
 
+        self.detenerButton = tk.Button(self.panel_principal, text="Conectar", font=("Roboto", 20), command=self.regresar)
+        self.detenerButton.pack(side=tk.TOP, padx=10, pady=10)
+
         self.play_video()
 
-        # Vincular la tecla Escape para salir de pantalla completa
-        self.panel_principal.bind("<Key>", lambda event: self.regresar(event))
 
     def play_video(self):
         
@@ -50,7 +51,7 @@ class VideoFrame:
         for widget in panel.winfo_children():
             widget.destroy()
 
-    def regresar(self, event):
+    def regresar(self):
         
         self.player.stop()
 
