@@ -188,6 +188,7 @@ class SmartTVAppLogic:
         try:
             result = subprocess.run(['sudo', 'mount', '/dev/sda1', '/home/pi/usb'],
                                     stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            print(result)
             if result.returncode == 0:
                 output = result.stdout.decode('utf-8').strip()
                 mount_path = output.split()[-1]
