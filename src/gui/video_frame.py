@@ -18,12 +18,12 @@ class VideoFrame:
         self.video_panel = tk.Frame(self.panel_principal, bg="black")
         self.video_panel.pack(side=tk.TOP, fill="both", expand=True)
 
+        self.play_video()
+
         # Vincular la tecla Escape para salir de pantalla completa
         # self.panel_principal.bind("<Escape>", self.exit_fullscreen)
 
     def play_video(self):
-        if not self.video_listbox.curselection():
-            return
         
         selected_video = self.video_file
         video_path = os.path.join("/home/pi/usb", selected_video)

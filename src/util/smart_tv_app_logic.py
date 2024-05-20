@@ -78,7 +78,7 @@ class SmartTVAppLogic:
         
         type = self.mount_usb()
         
-        if type > 0:
+        if type:
             return type
         else:
             print("Failed to mount the USB device")
