@@ -3,7 +3,7 @@ MIT License
 Copyright (c) [2023] [González Cuellar Arturo].
 Copyright (c) [2023] [Páez López Didier Marcelo].
 Copyright (c) [2024] [Colon Palacios Emmanuel].
-Copyright (c) [2024] [Piña Rossete Marco Antonio].
+Copyright (c) [2024] [Piña Rossette Marco Antonio].
 Copyright (c) [2024] [San Miguel Iturria Cecilia Fernanda].
 
 Permission is granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software").
