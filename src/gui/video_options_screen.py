@@ -46,4 +46,4 @@ class VideoScreen:
 
     def abrir_video_frame(self):
         self.limpiar_panel(self.panel_principal)     
-        VideoFrame(self.panel_principal, self.app_logic, self.video_files[self.video_listbox.curselection()[0]])
+        VideoFrame(self.panel_principal, self.app_logic, self.video_files[self.video_listbox.curselection()])
