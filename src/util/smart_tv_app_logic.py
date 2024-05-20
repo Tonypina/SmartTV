@@ -175,16 +175,17 @@ class SmartTVAppLogic:
         # Simulación de conexión a una red
         print(f"Conectando a la red '{network}' con la contraseña '{password}'")
 
-    def usb_inserted(self, device_node):
+    def usb_inserted(self):
         
-        mount_path = self.mount_usb(device_node)
-        print(mount_path)
-        # if mount_path:
-        #     self.analyze_usb_content(mount_path)
-        # else:
-        #     print("Failed to mount the USB device")
+        type = self.mount_usb()
+        
+        if type > 0:
+            return type
+        else:
+            print("Failed to mount the USB device")
+            return None
 
-    def mount_usb(self, device_node):
+    def mount_usb(self):
         usb_path = "/home/pi/usb"
         try:
             result = subprocess.run(['sudo', 'mount', '/dev/sda1', usb_path],
@@ -192,7 +193,8 @@ class SmartTVAppLogic:
             
             if result.returncode == 0:
 
-                self.analyze_usb_content(usb_path)
+                type = self.analyze_usb_content(usb_path)
+                return type
             else:
                 print(f"Error mounting USB: {result.stderr.decode('utf-8')}")
                 return None
@@ -219,14 +221,10 @@ class SmartTVAppLogic:
                     music_files.append(os.path.join(root, file))
 
         if len(video_files) and not len(image_files) and not len(music_files):
-            # self.show_video_options(video_files)
-            print("Tiene puros videos")
+            return 0
         elif len(image_files) and not len(video_files) and not len(music_files):
-            # self.show_image_slideshow(image_files)
-            print("Tiene puras imagenes")
+            return 1
         elif len(music_files) and not len(video_files) and not len(image_files):
-            # self.play_music_playlist(music_files)
-            print("Tiene puras canciones")
+            return 2
         else:
-            # self.ask_user_action(video_files, image_files, music_files)
-            print("Es mixto")
+            return 3

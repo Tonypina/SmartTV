@@ -9,6 +9,8 @@ import pyudev
 # Nuevo
 from gui.home_screen import HomeScreen
 from gui.network_screen import NetworkScreen
+from gui.video_options_screen import VideoOptions
+from gui.images_screen import ImagesScreen
 from gui.usb_screen import USBScreen
 
 class SmartTVAppGUI(tk.Tk):
@@ -151,4 +153,32 @@ class SmartTVAppGUI(tk.Tk):
         monitor.filter_by(subsystem='usb')
         for device in iter(monitor.poll, None):
             if device.action == 'add':
-                self.after(3000, self.app_logic.usb_inserted, device.device_node)
+                self.after(3000, self.usb_inserted)
+
+    def usb_inserted(self):
+        type = self.app_logic.usb_inserted()
+
+        if (type > 0) :
+            if (type == 0):
+                self.abrir_video_options_screen()
+            elif (type == 1):
+                self.abrir_images_screen()
+            elif (type == 2):
+                pass
+                # self.reproduce_music()
+            elif (type == 3):
+                pass
+        else:
+            print("Error al leer la USB")
+
+    def abrir_video_options_screen(self):
+        self.limpiar_panel(self.cuerpo_principal)     
+        VideoOptions(self.cuerpo_principal, self.app_logic)
+    
+    def abrir_images_screen(self):
+        self.limpiar_panel(self.cuerpo_principal)     
+        ImagesScreen(self.cuerpo_principal, self.app_logic)
+    
+    # def reproduce_music(self):
+    #     self.limpiar_panel(self.cuerpo_principal)     
+    #     ImagesScreen(self.cuerpo_principal, self.app_logic)
