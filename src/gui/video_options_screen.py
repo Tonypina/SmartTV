@@ -1,60 +1,100 @@
+import os
 import tkinter as tk
-from config import  COLOR_CUERPO_PRINCIPAL
+from tkinter import ttk
+import vlc
 
+def get_video_files(directory="/home/pi/usb"):
+    video_extensions = ['.mp4', '.avi', '.mkv', '.mov', '.wmv']
+    return [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f)) and os.path.splitext(f)[1].lower() in video_extensions]
 
-class VideoOptions():
-
+class VideoScreen:
     def __init__(self, panel_principal, app_logic):
+        self.panel_principal = panel_principal
+        self.app_logic = app_logic
+        self.player = vlc.MediaPlayer()
+        self.is_fullscreen = False
 
-        self.wifi_ssids = app_logic.get_wifi_ssids()
+        self.video_files = get_video_files()
 
-        # Crear paneles: barra sup
+        # Crear paneles: barra superior
         self.barra_sup = tk.Frame(panel_principal)
-        self.barra_sup.pack(side=tk.TOP, fill=tk.X, expand=False) 
-        
+        self.barra_sup.pack(side=tk.TOP, fill=tk.X, expand=False)
+
         # Crear paneles: barra izquierda
         self.barra_izq = tk.Frame(panel_principal)
-        self.barra_izq.config(bg=COLOR_CUERPO_PRINCIPAL)
-        self.barra_izq.pack(side=tk.LEFT, fill="both", expand=True) 
+        self.barra_izq.pack(side=tk.LEFT, fill="both", expand=True)
 
-        # Crear paneles: barra der
+        # Crear paneles: barra derecha
         self.barra_der = tk.Frame(panel_principal)
-        self.barra_der.config(bg=COLOR_CUERPO_PRINCIPAL)
-        self.barra_der.pack(side=tk.RIGHT, fill="both", expand=True)  
+        self.barra_der.pack(side=tk.RIGHT, fill="both", expand=True)
 
-        # Primer Label con texto
-        self.labelTitulo = tk.Label(
-            self.barra_sup, text="Configuración de Red")
-        self.labelTitulo.config(fg="#222d33", font=("Roboto", 30), bg=COLOR_CUERPO_PRINCIPAL, pady=50)
+        # Título
+        self.labelTitulo = tk.Label(self.barra_sup, text="Selecciona un Video")
+        self.labelTitulo.config(fg="#222d33", font=("Roboto", 30), pady=50)
         self.labelTitulo.pack(side=tk.TOP, fill='both', expand=True)
 
-        self.selectedSSIDLabel = tk.Label(self.barra_der, text="SSID: ")
-        self.selectedSSIDLabel.config(fg="#222d33", font=(
-            "Roboto", 20), padx=10, width=20, bg=COLOR_CUERPO_PRINCIPAL)
-        self.selectedSSIDLabel.pack(side=tk.TOP)
+        # Lista de videos
+        self.video_listbox = tk.Listbox(self.barra_izq, font=("Roboto", 20))
+        self.video_listbox.pack(side=tk.LEFT, fill="both", expand=True)
+        for video in self.video_files:
+            self.video_listbox.insert(tk.END, video)
 
-        for network in self.wifi_ssids:
-            self.ssids_config(network)
+        # Botón de reproducir
+        self.play_button = tk.Button(self.barra_der, text="Reproducir", font=("Roboto", 20), command=self.play_video)
+        self.play_button.pack(side=tk.TOP, fill='both', expand=True)
 
-    def ssids_config(self, ssid):
-        ssidLabel = tk.Button(self.barra_izq, font=(
-            "Roboto", 20), text=ssid, anchor="w", bd=0, fg="#222d33", command=self.select_ssid(ssid), 
-            bg=COLOR_CUERPO_PRINCIPAL, pady=10)
-        ssidLabel.pack()
-        ssidLabel.bind("<Enter>", lambda event: self.on_enter(event, ssidLabel))
-        ssidLabel.bind("<Leave>", lambda event: self.on_leave(event, ssidLabel))
-        ssidLabel.bind("<FocusIn>", lambda event: self.on_enter(event, ssidLabel))
-        ssidLabel.bind("<FocusOut>", lambda event: self.on_leave(event, ssidLabel))
+        # Botón de salir de pantalla completa
+        self.exit_button = tk.Button(self.barra_der, text="Salir de Pantalla Completa", font=("Roboto", 20), command=self.exit_fullscreen)
+        self.exit_button.pack(side=tk.TOP, fill='both', expand=True)
+        self.exit_button.pack_forget()  # Ocultar el botón al inicio
 
-    def select_ssid(self, ssid):
-        self.selectedSSIDLabel.config(text="SSID: "+ssid)
-        # self.selectedSSIDLabel.pack(side=tk.TOP, expand=True)
-        pass
+        # Área de video
+        self.video_panel = tk.Frame(self.barra_der, bg="black")
+        self.video_panel.pack(side=tk.TOP, fill="both", expand=True)
 
-    def on_enter(self, event, button):
-        # Cambiar estilo al pasar el ratón por encima
-        button.config(width=self.button_width + 20, height=self.button_height + 20, fg='white')
+        # Inicializar VLC player para integrar con tkinter
+        self.instance = vlc.Instance()
+        self.player = self.instance.media_player_new()
 
-    def on_leave(self, event, button):
-        # Restaurar estilo al salir el ratón
-        button.config(width=self.button_width, height=self.button_height, fg='white')
+        # Vincular la tecla Escape para salir de pantalla completa
+        self.panel_principal.bind("<Escape>", self.exit_fullscreen)
+
+    def play_video(self):
+        selected_video_index = self.video_listbox.curselection()
+        if not selected_video_index:
+            return
+        
+        selected_video = self.video_files[selected_video_index[0]]
+        video_path = os.path.join(self.video_directory, selected_video)
+
+        # Detener el video actual si está reproduciéndose
+        self.player.stop()
+
+        # Crear un nuevo media y reproducirlo
+        media = self.instance.media_new(video_path)
+        self.player.set_media(media)
+
+        # Configurar el panel de video en el tkinter frame
+        handle = self.video_panel.winfo_id()
+        self.player.set_hwnd(handle)
+
+        # Reproducir el video
+        self.player.play()
+
+        # Cambiar a pantalla completa
+        self.enter_fullscreen()
+
+    def enter_fullscreen(self):
+        self.is_fullscreen = True
+        self.panel_principal.attributes('-fullscreen', True)
+        self.barra_sup.pack_forget()
+        self.barra_izq.pack_forget()
+        self.exit_button.pack(side=tk.TOP, fill='both', expand=True)
+
+    def exit_fullscreen(self, event=None):
+        if self.is_fullscreen:
+            self.is_fullscreen = False
+            self.panel_principal.attributes('-fullscreen', False)
+            self.barra_sup.pack(side=tk.TOP, fill=tk.X, expand=False)
+            self.barra_izq.pack(side=tk.LEFT, fill="both", expand=True)
+            self.exit_button.pack_forget()
