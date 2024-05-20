@@ -3,6 +3,8 @@ from tkinter import font
 from config import COLOR_BARRA_SUPERIOR, COLOR_MENU_LATERAL, COLOR_CUERPO_PRINCIPAL, COLOR_MENU_CURSOR_ENCIMA
 import util.util_imagenes as util_img
 from util.smart_tv_app_logic import SmartTVAppLogic
+import threading
+import pyudev
 
 # Nuevo
 from gui.home_screen import HomeScreen
@@ -26,6 +28,11 @@ class SmartTVAppGUI(tk.Tk):
         self.controles_menu_lateral()
         self.controles_cuerpo(self.app_logic)
         self.bind('<Escape>', self.exit_app)
+
+        # Iniciar el hilo para detectar la inserción de USB
+        self.usb_monitor_thread = threading.Thread(target=self.monitor_usb)
+        self.usb_monitor_thread.daemon = True
+        self.usb_monitor_thread.start()
     
     def config_window(self):
         # Configuración inicial de la ventana
@@ -137,3 +144,11 @@ class SmartTVAppGUI(tk.Tk):
 
     def exit_app(self, event=None):
         self.destroy()
+
+    def monitor_usb(self):
+        context = pyudev.Context()
+        monitor = pyudev.Monitor.from_netlink(context)
+        monitor.filter_by(subsystem='usb')
+        for device in iter(monitor.poll, None):
+            if device.action == 'add':
+                self.after(0, self.app_logic.usb_inserted, device.device_node)

@@ -174,3 +174,55 @@ class SmartTVAppLogic:
     def connect_to_network(self, network, password):
         # Simulación de conexión a una red
         print(f"Conectando a la red '{network}' con la contraseña '{password}'")
+
+    def usb_inserted(self, device_node):
+        
+        mount_path = self.mount_usb(device_node)
+        print(mount_path)
+        # if mount_path:
+        #     self.analyze_usb_content(mount_path)
+        # else:
+        #     print("Failed to mount the USB device")
+
+    def mount_usb(self, device_node):
+        try:
+            result = subprocess.run(['udisksctl', 'mount', '--no-user-interaction', '--block-device', device_node],
+                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            if result.returncode == 0:
+                output = result.stdout.decode('utf-8').strip()
+                mount_path = output.split()[-1]
+
+                return mount_path
+            else:
+                print(f"Error mounting USB: {result.stderr.decode('utf-8')}")
+                return None
+        except Exception as e:
+            print(f"Exception mounting USB: {e}")
+            return None
+
+    def analyze_usb_content(self, usb_path):
+        video_ext = ('.mp4', '.avi', '.mov', '.mkv')
+        image_ext = ('.jpg', '.jpeg', '.png', '.gif')
+        music_ext = ('.mp3', '.wav', '.aac', '.flac')
+
+        video_files = []
+        image_files = []
+        music_files = []
+
+        for root, _, files in os.walk(usb_path):
+            for file in files:
+                if file.endswith(video_ext):
+                    video_files.append(os.path.join(root, file))
+                elif file.endswith(image_ext):
+                    image_files.append(os.path.join(root, file))
+                elif file.endswith(music_ext):
+                    music_files.append(os.path.join(root, file))
+
+        if video_files and not image_files and not music_files:
+            self.show_video_options(video_files)
+        elif image_files and not video_files and not music_files:
+            self.show_image_slideshow(image_files)
+        elif music_files and not video_files and not image_files:
+            self.play_music_playlist(music_files)
+        else:
+            self.ask_user_action(video_files, image_files, music_files)
