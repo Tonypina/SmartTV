@@ -12,11 +12,12 @@ sudo apt -y install ffmpeg vlc python3-vlc python3-pyudev wget
 # Instalar python3-tk
 sudo apt-get install python3-tk
 
-# Instalar ir-keytable for Infrared control
-sudo apt install ir-keytable
-
 # Instalar la biblioteca Pillow con pip
 pip install Pillow
+
+sudo apt install xserver-xorg -y
+
+sudo apt install lightdm -y
 
 # Instalar libwidevinecdm0
 sudo apt install libwidevinecdm0 -y

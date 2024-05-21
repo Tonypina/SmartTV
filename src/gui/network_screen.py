@@ -69,7 +69,7 @@ class NetworkScreen:
     def connect_to_network(self):
         ssid = self.selected_ssid
         password = self.passwordEntry.get()
-        print(ssid, password)
+
         success = self.app_logic.connect_to_network(ssid, password)
         if success:
             self.statusLabel.config(text="Conectado", fg="green")
