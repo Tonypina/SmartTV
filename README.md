@@ -1,4 +1,4 @@
-# Smart TV App
+# MaFE TV App
 
 A Python graphical user interface (GUI) application to simulate a Smart TV interface.
 
