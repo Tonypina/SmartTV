@@ -5,28 +5,18 @@ A Python graphical user interface (GUI) application to simulate a Smart TV inter
 ## Requirements
 
 - Python 3.x
-- Modules: tkinter, vlc, os
+- Modules: tkinter, vlc, lightdm, pyudev, pillow, libwidevinecdm0, xserver-xorg
 
 ## Instructions for Use
 
 1. Clone the repository or download the source code.
-2. Install the dependencies.
-3. Configure your operating system so that the `código main.py` application opens automatically at startup.
+2. Install the dependencies running the `requirements.sh`.
+3. Configure your operating system so that the `main.py` application opens automatically at startup.
 
 ## Features
 
 - **Full Screen Mode:** The application runs in full screen mode for an immersive user experience.
 - **Access Buttons:** Access services such as Netflix, YouTube, Google, and play media content from a USB drive or with VLC.
-- **Shutdown Control:** Event handling has been added to prevent unexpected shutdowns and stop playback before exiting.
-
-## Customization
-
-- Customized the list of buttons and their functions in the source code.
-- Styling of buttons was adjusted.
-
-## Notes
-
-- This code uses the VLC library for media playback. Make sure you have VLC installed on your system.
 
 ## Authors
 - Colón Palacios Emmanuel
